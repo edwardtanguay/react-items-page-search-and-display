@@ -15,11 +15,17 @@ const PagePersons = () => {
 			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
 			return m;
 		});
+		let filteredPersons = [...initialPersons];
+
+		const id = Number(qsys.getParameterValueFromUrl('id'));
+		if (id !== 0) {
+			filteredPersons = initialPersons.filter(m => m.employeeID === id);
+		}
 
 		setInitialPersons(initialPersons);
-		setFilteredPersons(initialPersons); // API
-		if (initialPersons.length === 1) {
-			setFilteredPerson(initialPersons[0]);
+		setFilteredPersons(filteredPersons); // API
+		if (filteredPersons.length === 1) {
+			setFilteredPerson(filteredPersons[0]);
 		}
 
 		inputSearchText.current.focus();
