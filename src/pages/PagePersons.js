@@ -106,23 +106,26 @@ const PagePersons = () => {
 
 	return (
 		<div className="pagePersons">
-			{filteredPersons.length > 1 && filteredPersons.length < initialPersons.length && (
-				<div>
-					{filteredPersons.length} of <span className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</span>
-				</div>
-			)}
 
-			{filteredPersons.length === 1 && (
-				<div>
-					1 of <span className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</span>
-				</div>
-			)}
+			<div className="totalHeader">
+				{filteredPersons.length > 1 && filteredPersons.length < initialPersons.length && (
+					<div>
+						{filteredPersons.length} of <span className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</span>
+					</div>
+				)}
 
-			{filteredPersons.length === initialPersons.length && (
-				<div>
-					<div>{initialPersons.length} Persons</div>
-				</div>
-			)}
+				{filteredPersons.length === 1 && (
+					<div>
+						1 of <span className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</span>
+					</div>
+				)}
+
+				{filteredPersons.length === initialPersons.length && (
+					<div>
+						<div>{initialPersons.length} Persons</div>
+					</div>
+				)}
+			</div>
 
 			<div className="searchArea">
 				<input type="text" ref={inputSearchText} placeholder="SEARCH" value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
@@ -147,13 +150,14 @@ const PagePersons = () => {
 			{filteredPersons.length === 1 && (
 				<div className="singlePersonCard">
 					<div className="innerArea">
+						<img src={`images/persons/${filteredPerson.image}`} alt="person" className="photo" />
 						<div className="info">
 							<div className="fullName">{filteredPerson.firstName} {filteredPerson.lastName}</div>
 							<div className="title">{filteredPerson.title}</div>
 							<div className="notes">{filteredPerson.notes}</div>
 						</div>
-						<img src={`images/persons/${filteredPerson.image}`} alt="person" className="photo" />
 					</div>
+					<div className="clear"></div>
 				</div>
 			)}
 
