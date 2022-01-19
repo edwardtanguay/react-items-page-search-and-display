@@ -47,6 +47,7 @@ const PagePersons = () => {
 		if (filteredPersons.length === 1) {
 			setFilteredPerson(filteredPersons[0]);
 		}
+		qsys.changeBrowserState(document, 'persons', 'searchText', searchText, `Search: ${searchText}`);
 	}
 
 	const showSinglePerson = (person) => {
@@ -65,6 +66,7 @@ const PagePersons = () => {
 		}
 		setSearchText('');
 		inputSearchText.current.focus();
+		qsys.changeBrowserState(document, 'persons', '', '', `All persons`);
 	}
 
 	return (
