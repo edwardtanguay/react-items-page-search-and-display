@@ -1,6 +1,6 @@
 import './App.scss';
 import { Routes, Route } from 'react-router-dom';
-import PageWelcome from './pages/PageWelcome';
+import PageWelcome from './pages/PageHome';
 import PagePersons from './pages/PagePersons';
 import Menu from './components/Nav';
 
