@@ -72,8 +72,8 @@ const PagePersons = () => {
 	}, []);
 
 	const displaySearchResults = (e) => {
-		if (filteredPersons.length > 0) {
-			const searchText = e.target.value;
+		const searchText = e.target.value;
+		if (searchText.trim() !== '' || filteredPersons.length > 0) {
 			setSearchText(e.target.value);
 
 			const filteredPersons = searchAllPersons([...initialPersons], searchText);
@@ -125,7 +125,7 @@ const PagePersons = () => {
 			)}
 
 			<div className="searchArea">
-				<input type="text" ref={inputSearchText} value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
+				<input type="text" ref={inputSearchText} placeholder="SEARCH" value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
 			</div>
 
 			{/* MULTIPLE PERSONS */}

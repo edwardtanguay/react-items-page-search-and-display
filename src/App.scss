@@ -80,6 +80,10 @@ body {
 			margin: 10px 0 20px 0;
 			input {
 				font-size: 1.5rem;
+				width: 300px;
+			}
+			::placeholder {
+				color: #ccc;
 			}
 		}
 		div.singlePersonCard {
@@ -112,6 +116,18 @@ body {
 			}
 			div.notes {
 				margin: 10px 0 0 0;
+			}
+		}
+	}
+}
+
+/* smartphone view */
+@media (max-width: 577px) {
+	body {
+		padding: 0;
+		.App {
+			nav {
+				width: 100%;
 			}
 		}
 	}
