@@ -70,7 +70,14 @@ const PagePersons = () => {
 			{/* SINGLE PERSON */}
 			{filteredPersons.length === 1 && (
 				<div className="singlePersonCard">
-					<div>{filteredPerson.firstName}</div>
+					<div className="innerArea">
+						<div className="info">
+							<div className="fullName">{filteredPerson.firstName} {filteredPerson.lastName}</div>
+							<div className="title">{filteredPerson.title}</div>
+							<div className="notes">{filteredPerson.notes}</div>
+						</div>
+						<img src={`images/persons/${filteredPerson.image}`} alt="" className="photo" />
+					</div>
 				</div>
 			)}
 

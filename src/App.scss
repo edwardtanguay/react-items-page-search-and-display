@@ -76,5 +76,36 @@ body {
 				font-size: 1.5rem;
 			}
 		}
+		div.singlePersonCard {
+			background: #eee;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			margin: 0 0 20px 0;
+			div.fullName {
+				font-size: 2.5rem;
+			}
+			div.title {
+				font-size: 2.1rem;
+				font-style: italic;
+				color: brown;
+			}
+			div.innerArea {
+				display: grid;
+				grid-template-columns: 1fr 200px;
+				grid-template-rows: 1fr;
+				gap: 0px 0px;
+				grid-template-areas: ". .";
+				div.info {
+					padding: 0 10px 0 0;
+				}
+				img {
+					width: 200px;
+				}
+			}
+			div.notes {
+				margin: 10px 0 0 0;
+			}
+		}
 	}
 }
