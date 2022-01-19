@@ -31,30 +31,41 @@ const PagePersons = () => {
 					personMatched = false;
 				}
 			});
-			if(personMatched) filteredPersons.push(person);
+			if (personMatched) filteredPersons.push(person);
 		});
 		setFilteredPersons([...filteredPersons]);
-
-		// setFilteredPersons([...initialPersons.filter(m => m.searchText.toUpperCase().includes(searchText.toUpperCase()))]);
 	}
 
+	// TODO: make it "1 Person" and "2 Persons"
 	return (
 		<div className="pagePersons">
 			{filteredPersons.length} Persons
 			<div className="searchArea">
 				<input type="text" onChange={displaySearchResults} />
 			</div>
-			<div className="personsArea">
-				{filteredPersons.map((p, i) => {
-					return (
-						<div className="personCard">
-							<div className="fullName">{p.firstName} {p.lastName}</div>
-							<div className="title">{p.title}</div>
-							<img src={`images/persons/${p.image}`} alt="" className="photo" />
-						</div>
-					)
-				})}
-			</div>
+
+			{/* MULTIPLE PERSONS */}
+			{filteredPersons.length > 1 && (
+				<div className="personsArea">
+					{filteredPersons.map((p, i) => {
+						return (
+							<div className="personCard">
+								<div className="fullName">{p.firstName} {p.lastName}</div>
+								<div className="title">{p.title}</div>
+								<img src={`images/persons/${p.image}`} alt="" className="photo" />
+							</div>
+						)
+					})}
+				</div>
+			)}
+
+			{/* SINGLE PERSON */}
+			{filteredPersons.length === 1 && (
+				<div className="singlePersonCard">
+					single person
+				</div>
+			)}
+
 		</div>
 	)
 }
