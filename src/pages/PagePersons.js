@@ -75,7 +75,7 @@ const PagePersons = () => {
 			)}
 
 			<div className="searchArea">
-				<input type="text" value={searchText} onChange={displaySearchResults} />
+				<input type="text" autoFocus value={searchText} onChange={displaySearchResults} />
 			</div>
 
 			{/* MULTIPLE PERSONS */}
