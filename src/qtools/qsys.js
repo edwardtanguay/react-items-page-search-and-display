@@ -9,6 +9,7 @@ export const changeBrowserState = (doc, page, variable, value, title) => {
 
 export const getParameterValueFromUrl = (parameter) => {
 	const urlParams = new URLSearchParams(window.location.search);
+	console.log(urlParams);
 	const value = urlParams.get(parameter);
 	if (value === null) {
 		return '';

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from 'react';
 import rawPersonsFromJson from '../data/persons.json';
 import * as qsys from '../qtools/qsys';
@@ -10,7 +11,7 @@ const PagePersons = () => {
 	const inputSearchText = useRef(null);
 
 	const updateUrlBase = () => {
-			qsys.changeBrowserState(document, 'persons', '', '', `All Persons`);
+		qsys.changeBrowserState(document, 'persons', '', '', `All Persons`);
 	}
 
 	const updateUrlWithId = (person) => {
@@ -47,12 +48,11 @@ const PagePersons = () => {
 		});
 		let _filteredPersons = [..._initialPersons];
 
-		updateUrlBase();
+		// updateUrlBase();
 
 		const urlId = Number(qsys.getParameterValueFromUrl('id'));
 		if (urlId !== 0) {
 			_filteredPersons = _initialPersons.filter(m => m.employeeID === urlId);
-			console.log(_filteredPersons);
 			updateUrlWithId(_filteredPersons[0]);
 		}
 
@@ -69,27 +69,29 @@ const PagePersons = () => {
 			setFilteredPerson(_filteredPersons[0]);
 		}
 
-		inputSearchText.current.focus();
+			inputSearchText.current.focus();
 
 	}, []);
 
 	const displaySearchResults = (e) => {
-		const searchText = e.target.value;
-		setSearchText(e.target.value);
+		if (filteredPersons.length > 0) {
+			const searchText = e.target.value;
+			setSearchText(e.target.value);
 
-		const filteredPersons = searchAllPersons([...initialPersons], searchText);
-		setFilteredPersons([...filteredPersons]);
-		if (filteredPersons.length === 1) {
-			setFilteredPerson(filteredPersons[0]);
+			const filteredPersons = searchAllPersons([...initialPersons], searchText);
+			setFilteredPersons([...filteredPersons]);
+			if (filteredPersons.length === 1) {
+				setFilteredPerson(filteredPersons[0]);
+			}
+			updateUrlWithSearchText(searchText);
 		}
-		updateUrlWithSearchText(searchText);
 	}
 
 	const showSinglePerson = (person) => {
 		setFilteredPersons([person]);
 		setFilteredPerson(person);
-		setSearchText('');
-		inputSearchText.current.focus();
+		// setSearchText('');
+		// inputSearchText.current.focus();
 		updateUrlWithId(person);
 	}
 
@@ -100,26 +102,34 @@ const PagePersons = () => {
 			setFilteredPerson(initialPersons[0]);
 		}
 		setSearchText('');
-		inputSearchText.current.focus();
 		updateUrlBase();
+		setTimeout(() => {
+			inputSearchText.current.focus();
+		}, 100);
 	}
 
 	return (
 		<div className="pagePersons">
-			{filteredPersons.length > 1 && (
-				<>
-					{filteredPersons.length} Persons
-				</>
+			{filteredPersons.length > 1 && filteredPersons.length < initialPersons.length && (
+				<div>
+					{filteredPersons.length} of <span className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</span>
+				</div>
 			)}
 
 			{filteredPersons.length === 1 && (
-				<>
-					<div className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</div>
-				</>
+				<div>
+					1 of <span className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</span>
+				</div>
+			)}
+
+			{filteredPersons.length === initialPersons.length && (
+				<div>
+					<div>{initialPersons.length} Persons</div>
+				</div>
 			)}
 
 			<div className="searchArea">
-				<input type="text" ref={inputSearchText} value={searchText} onChange={displaySearchResults} />
+				<input type="text" ref={inputSearchText} value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
 			</div>
 
 			{/* MULTIPLE PERSONS */}
