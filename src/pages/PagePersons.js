@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import rawPersonsFromJson from '../data/persons.json';
+import * as qsys from '../qtools/qsys';
 
 // TODO: focus search box
 const PagePersons = () => {
@@ -53,6 +54,7 @@ const PagePersons = () => {
 		setFilteredPerson(person);
 		setSearchText('');
 		inputSearchText.current.focus();
+		qsys.changeBrowserState(document, 'persons', 'id', person.employeeID, `Person: ${person.firstName} ${person.lastName}`);
 	}
 
 	const showAllPersons = () => {
@@ -65,7 +67,6 @@ const PagePersons = () => {
 		inputSearchText.current.focus();
 	}
 
-	// TODO: make it "1 Person" and "2 Persons"
 	return (
 		<div className="pagePersons">
 			{filteredPersons.length > 1 && (
