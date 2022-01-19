@@ -1,30 +1,35 @@
-import { useState } from 'react';
-import rawPersons from '../data/persons.json';
+import { useState, useEffect } from 'react';
+import rawPersonsFromJson from '../data/persons.json';
 
 const PagePersons = () => {
 	const [searchText, setSearchText] = useState('');
-	const [persons, setPersons] = useState(rawPersons);
+	const [initialPersons, setInitialPersons] = useState([]);
+	const [filteredPersons, setFilteredPersons] = useState([]);
+
+	useEffect(() => {
+		const initialPersons = rawPersonsFromJson.map(m => {
+			m.searchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
+			return m;
+		});
+		setInitialPersons(initialPersons);
+		setFilteredPersons(initialPersons); // API
+	}, []);
 
 	const displaySearchResults = (e) => {
 		const searchText = e.target.value;
 		setSearchText(searchText);
 
-		// if (searchText === '') {
-		// 	setItemsByIdCode('newestFirst');
-		// } else {
-		// 	const items = getItems({ idCode: '', searchText, id: 0 });
-		// 	setHowtos([...items]);
-		// }
+		setFilteredPersons([...initialPersons.filter(m => m.searchText.toUpperCase().includes(searchText.toUpperCase()))]);
 	}
 
 	return (
 		<div className="pagePersons">
-			{persons.length} Persons
+			{filteredPersons.length} Persons
 			<div className="searchArea">
 				<input type="text" onChange={displaySearchResults} />
 			</div>
 			<div className="personsArea">
-				{persons.map((p, i) => {
+				{filteredPersons.map((p, i) => {
 					return (
 						<div className="personCard">
 							<div className="fullName">{p.firstName} {p.lastName}</div>
