@@ -38,23 +38,26 @@ const PagePersons = () => {
 
 	}, []);
 
-	const displaySearchResults = (e) => {
-		const searchText = e.target.value;
-		setSearchText(e.target.value);
-
-		const searchWords = searchText.split(' ');
-
-		const filteredPersons = [];
+	const searchAllPersons = (searchText) => {
+		const foundPersons = [];
 		initialPersons.forEach(person => {
 			let personMatched = true;
-
+			const searchWords = searchText.split(' ');
 			searchWords.forEach(searchWord => {
 				if (!person.bulkSearchText.toUpperCase().includes(searchWord.toUpperCase())) {
 					personMatched = false;
 				}
 			});
-			if (personMatched) filteredPersons.push(person);
+			if (personMatched) foundPersons.push(person);
 		});
+		return foundPersons;
+	}
+
+	const displaySearchResults = (e) => {
+		const searchText = e.target.value;
+		setSearchText(e.target.value);
+
+		const filteredPersons = searchAllPersons(searchText);
 		setFilteredPersons([...filteredPersons]);
 		if (filteredPersons.length === 1) {
 			setFilteredPerson(filteredPersons[0]);
