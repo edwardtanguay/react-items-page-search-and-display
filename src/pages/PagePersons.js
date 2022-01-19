@@ -107,7 +107,9 @@ const PagePersons = () => {
 		setSearchText('');
 		updateUrlBase();
 		setTimeout(() => {
+		if (!isSmartphone) {
 			inputSearchText.current.focus();
+		}
 		}, 100);
 	}
 
