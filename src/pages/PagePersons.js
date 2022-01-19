@@ -48,8 +48,6 @@ const PagePersons = () => {
 		});
 		let _filteredPersons = [..._initialPersons];
 
-		// updateUrlBase();
-
 		const urlId = Number(qsys.getParameterValueFromUrl('id'));
 		if (urlId !== 0) {
 			_filteredPersons = _initialPersons.filter(m => m.employeeID === urlId);
@@ -69,7 +67,7 @@ const PagePersons = () => {
 			setFilteredPerson(_filteredPersons[0]);
 		}
 
-			inputSearchText.current.focus();
+		inputSearchText.current.focus();
 
 	}, []);
 
@@ -90,8 +88,6 @@ const PagePersons = () => {
 	const showSinglePerson = (person) => {
 		setFilteredPersons([person]);
 		setFilteredPerson(person);
-		// setSearchText('');
-		// inputSearchText.current.focus();
 		updateUrlWithId(person);
 	}
 
