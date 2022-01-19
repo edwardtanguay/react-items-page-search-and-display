@@ -9,6 +9,22 @@ const PagePersons = () => {
 	const [filteredPerson, setFilteredPerson] = useState({});
 	const inputSearchText = useRef(null);
 
+	const updateUrlBase = () => {
+			qsys.changeBrowserState(document, 'persons', '', '', `All Persons`);
+	}
+
+	const updateUrlWithId = (person) => {
+		qsys.changeBrowserState(document, 'persons', 'id', person.employeeID, `Person: ${person.firstName} ${person.lastName}`);
+	};
+
+	const updateUrlWithSearchText = (searchText) => {
+		if (searchText.trim() === '') {
+			updateUrlBase();
+		} else {
+			qsys.changeBrowserState(document, 'persons', 'searchText', searchText, `Person Search: "${searchText}"`);
+		}
+	};
+
 	const searchAllPersons = (_persons, searchText) => {
 		const foundPersons = [];
 		_persons.forEach(person => {
@@ -31,15 +47,20 @@ const PagePersons = () => {
 		});
 		let _filteredPersons = [..._initialPersons];
 
+		updateUrlBase();
+
 		const urlId = Number(qsys.getParameterValueFromUrl('id'));
 		if (urlId !== 0) {
 			_filteredPersons = _initialPersons.filter(m => m.employeeID === urlId);
+			console.log(_filteredPersons);
+			updateUrlWithId(_filteredPersons[0]);
 		}
 
-		const urlSearchText  = qsys.getParameterValueFromUrl('searchText');
+		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
 		if (urlSearchText !== '') {
 			_filteredPersons = searchAllPersons(_initialPersons, urlSearchText);
 			setSearchText(urlSearchText);
+			updateUrlWithSearchText(urlSearchText);
 		}
 
 		setInitialPersons(_initialPersons);
@@ -61,7 +82,7 @@ const PagePersons = () => {
 		if (filteredPersons.length === 1) {
 			setFilteredPerson(filteredPersons[0]);
 		}
-		qsys.changeBrowserState(document, 'persons', 'searchText', searchText, `Search: ${searchText}`);
+		updateUrlWithSearchText(searchText);
 	}
 
 	const showSinglePerson = (person) => {
@@ -69,7 +90,7 @@ const PagePersons = () => {
 		setFilteredPerson(person);
 		setSearchText('');
 		inputSearchText.current.focus();
-		qsys.changeBrowserState(document, 'persons', 'id', person.employeeID, `Person: ${person.firstName} ${person.lastName}`);
+		updateUrlWithId(person);
 	}
 
 	const showAllPersons = () => {
@@ -80,7 +101,7 @@ const PagePersons = () => {
 		}
 		setSearchText('');
 		inputSearchText.current.focus();
-		qsys.changeBrowserState(document, 'persons', '', '', `All persons`);
+		updateUrlBase();
 	}
 
 	return (
