@@ -17,10 +17,16 @@ const PagePersons = () => {
 		});
 		let filteredPersons = [...initialPersons];
 
-		const id = Number(qsys.getParameterValueFromUrl('id'));
-		if (id !== 0) {
-			filteredPersons = initialPersons.filter(m => m.employeeID === id);
+		const urlId = Number(qsys.getParameterValueFromUrl('id'));
+		if (urlId !== 0) {
+			filteredPersons = initialPersons.filter(m => m.employeeID === urlId);
 		}
+
+		// const urlSearchText  = qsys.getParameterValueFromUrl('searchText');
+		// if (urlSearchText !== '') {
+		// 	filteredPersons = initialPersons.filter(m => m.employeeID === urlSearchText);
+		// }
+
 
 		setInitialPersons(initialPersons);
 		setFilteredPersons(filteredPersons); // API
