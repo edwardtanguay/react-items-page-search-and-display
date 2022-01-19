@@ -72,7 +72,6 @@ const PagePersons = () => {
 			setFilteredPerson(_filteredPersons[0]);
 		}
 
-		console.log(isSmartphone);
 		if (!isSmartphone) {
 			inputSearchText.current.focus();
 		}
