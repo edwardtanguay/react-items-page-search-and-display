@@ -2,17 +2,19 @@ import persons from '../data/persons.json';
 
 const PagePersons = () => {
 	return (
-		<>
+		<div className="pagePersons">
 			{persons.length} Persons
 			<hr />
-			<ul>
-				{persons.map((person, i) => {
+			<div className="personsArea">
+				{persons.map((p, i) => {
 					return (
-						<li key={i}>{person.firstName}</li>
+						<div className="personCard">
+							<div className="title">{p.firstName} {p.lastName}</div>
+						</div>
 					)
 				})}
-			</ul>
-		</>
+			</div>
+		</div>
 	)
 }
 

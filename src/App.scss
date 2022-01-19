@@ -46,4 +46,15 @@ body {
 			margin-bottom: 20px;
 		}
 	}
+	.pagePersons {
+		div.personsArea {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		div.personCard {
+			width: 200px;
+			background: #eee;
+			margin: 0 10px 10px 0;
+		}
+	}
 }
