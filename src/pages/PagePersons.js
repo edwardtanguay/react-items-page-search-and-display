@@ -4,7 +4,9 @@ const PagePersons = () => {
 	return (
 		<div className="pagePersons">
 			{persons.length} Persons
-			<hr />
+			<div className="searchArea">
+				<input type="text" />
+			</div>
 			<div className="personsArea">
 				{persons.map((p, i) => {
 					return (
