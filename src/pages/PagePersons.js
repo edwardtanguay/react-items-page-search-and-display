@@ -6,6 +6,7 @@ const PagePersons = () => {
 	const [searchText, setSearchText] = useState('');
 	const [initialPersons, setInitialPersons] = useState([]);
 	const [filteredPersons, setFilteredPersons] = useState([]);
+	const [filteredPerson, setFilteredPerson] = useState({});
 
 	useEffect(() => {
 		const initialPersons = rawPersonsFromJson.map(m => {
@@ -14,6 +15,10 @@ const PagePersons = () => {
 		});
 		setInitialPersons(initialPersons);
 		setFilteredPersons(initialPersons); // API
+		if (initialPersons.length === 1) {
+			setFilteredPerson(initialPersons[0]);
+		}
+
 	}, []);
 
 	const displaySearchResults = (e) => {
@@ -34,6 +39,9 @@ const PagePersons = () => {
 			if (personMatched) filteredPersons.push(person);
 		});
 		setFilteredPersons([...filteredPersons]);
+		if (filteredPersons.length === 1) {
+			setFilteredPerson(filteredPersons[0]);
+		}
 	}
 
 	// TODO: make it "1 Person" and "2 Persons"
@@ -49,7 +57,7 @@ const PagePersons = () => {
 				<div className="personsArea">
 					{filteredPersons.map((p, i) => {
 						return (
-							<div className="personCard">
+							<div className="personCard" key={i}>
 								<div className="fullName">{p.firstName} {p.lastName}</div>
 								<div className="title">{p.title}</div>
 								<img src={`images/persons/${p.image}`} alt="" className="photo" />
@@ -62,7 +70,7 @@ const PagePersons = () => {
 			{/* SINGLE PERSON */}
 			{filteredPersons.length === 1 && (
 				<div className="singlePersonCard">
-					single person
+					<div>{filteredPerson.firstName}</div>
 				</div>
 			)}
 
