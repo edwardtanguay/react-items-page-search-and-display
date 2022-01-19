@@ -8,7 +8,7 @@ const PagePersons = () => {
 
 	useEffect(() => {
 		const initialPersons = rawPersonsFromJson.map(m => {
-			m.searchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
+			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
 			return m;
 		});
 		setInitialPersons(initialPersons);
@@ -23,9 +23,14 @@ const PagePersons = () => {
 
 		const filteredPersons = [];
 		initialPersons.forEach(person => {
-			if (person.searchText.toUpperCase().includes(searchText.toUpperCase())) {
-				filteredPersons.push(person);
-			}
+			let personMatched = true;
+
+			searchWords.forEach(searchWord => {
+				if (!person.bulkSearchText.toUpperCase().includes(searchWord.toUpperCase())) {
+					personMatched = false;
+				}
+			});
+			if(personMatched) filteredPersons.push(person);
 		});
 		setFilteredPersons([...filteredPersons]);
 
