@@ -50,10 +50,30 @@ const PagePersons = () => {
 		setSearchText('');
 	}
 
+	const showAllPersons = () => {
+		setInitialPersons(initialPersons);
+		setFilteredPersons(initialPersons);
+		if (initialPersons.length === 1) {
+			setFilteredPerson(initialPersons[0]);
+		}
+		setSearchText('');
+	}
+
 	// TODO: make it "1 Person" and "2 Persons"
 	return (
 		<div className="pagePersons">
-			{filteredPersons.length} Persons
+			{filteredPersons.length > 1 && (
+				<>
+					{filteredPersons.length} Persons
+				</>
+			)}
+
+			{filteredPersons.length === 1 && (
+				<>
+					<div className="allPersonsLink" onClick={showAllPersons}>{initialPersons.length} Persons</div>
+				</>
+			)}
+
 			<div className="searchArea">
 				<input type="text" value={searchText} onChange={displaySearchResults} />
 			</div>

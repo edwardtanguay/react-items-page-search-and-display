@@ -47,6 +47,10 @@ body {
 		}
 	}
 	.pagePersons {
+		div.allPersonsLink {
+			text-decoration: underline;
+			cursor: pointer;
+		}
 		div.personsArea {
 			display: flex;
 			flex-wrap: wrap;
