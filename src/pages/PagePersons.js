@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import rawPersonsFromJson from '../data/persons.json';
 import * as qsys from '../qtools/qsys';
 
-// TODO: focus search box
 const PagePersons = () => {
 	const [searchText, setSearchText] = useState('');
 	const [initialPersons, setInitialPersons] = useState([]);
@@ -34,7 +33,7 @@ const PagePersons = () => {
 
 		const urlId = Number(qsys.getParameterValueFromUrl('id'));
 		if (urlId !== 0) {
-			_filteredPersons = initialPersons.filter(m => m.employeeID === urlId);
+			_filteredPersons = _initialPersons.filter(m => m.employeeID === urlId);
 		}
 
 		const urlSearchText  = qsys.getParameterValueFromUrl('searchText');
@@ -45,8 +44,8 @@ const PagePersons = () => {
 
 		setInitialPersons(_initialPersons);
 		setFilteredPersons(_filteredPersons); // API
-		if (filteredPersons.length === 1) {
-			setFilteredPerson(filteredPersons[0]);
+		if (_filteredPersons.length === 1) {
+			setFilteredPerson(_filteredPersons[0]);
 		}
 
 		inputSearchText.current.focus();
