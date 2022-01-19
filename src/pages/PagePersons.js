@@ -44,6 +44,9 @@ const PagePersons = () => {
 		}
 	}
 
+	const showSinglePerson = (person) => {
+	}
+
 	// TODO: make it "1 Person" and "2 Persons"
 	return (
 		<div className="pagePersons">
@@ -60,7 +63,7 @@ const PagePersons = () => {
 							<div className="personCard" key={i}>
 								<div className="fullName">{p.firstName} {p.lastName}</div>
 								<div className="title">{p.title}</div>
-								<img src={`images/persons/${p.image}`} alt="" className="photo" />
+								<img src={`images/persons/${p.image}`} alt="" className="photo" onClick={() => showSinglePerson(p)}/>
 							</div>
 						)
 					})}
@@ -76,7 +79,7 @@ const PagePersons = () => {
 							<div className="title">{filteredPerson.title}</div>
 							<div className="notes">{filteredPerson.notes}</div>
 						</div>
-						<img src={`images/persons/${filteredPerson.image}`} alt="" className="photo" />
+						<img src={`images/persons/${filteredPerson.image}`} alt="person"  className="photo" />
 					</div>
 				</div>
 			)}
