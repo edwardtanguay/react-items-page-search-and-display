@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import rawPersonsFromJson from '../data/persons.json';
 
+// TODO: focus search box
 const PagePersons = () => {
 	const [searchText, setSearchText] = useState('');
 	const [initialPersons, setInitialPersons] = useState([]);
