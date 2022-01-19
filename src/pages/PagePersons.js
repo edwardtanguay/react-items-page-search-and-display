@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import rawPersonsFromJson from '../data/persons.json';
 import * as qsys from '../qtools/qsys';
+import { useMediaQuery } from 'react-responsive';
 
 const PagePersons = () => {
 	const [searchText, setSearchText] = useState('');
@@ -9,6 +10,10 @@ const PagePersons = () => {
 	const [filteredPersons, setFilteredPersons] = useState([]);
 	const [filteredPerson, setFilteredPerson] = useState({});
 	const inputSearchText = useRef(null);
+
+	const isSmartphone = useMediaQuery({
+		query: '(max-width: 577px)'
+	});
 
 	const updateUrlBase = () => {
 		qsys.changeBrowserState(document, 'persons', '', '', `All Persons`);
@@ -67,7 +72,10 @@ const PagePersons = () => {
 			setFilteredPerson(_filteredPersons[0]);
 		}
 
-		inputSearchText.current.focus();
+		console.log(isSmartphone);
+		if (!isSmartphone) {
+			inputSearchText.current.focus();
+		}
 
 	}, []);
 
