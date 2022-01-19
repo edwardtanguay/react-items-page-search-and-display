@@ -10,9 +10,9 @@ const PagePersons = () => {
 	const [filteredPerson, setFilteredPerson] = useState({});
 	const inputSearchText = useRef(null);
 
-	const searchAllPersons = (searchText) => {
+	const searchAllPersons = (_persons, searchText) => {
 		const foundPersons = [];
-		initialPersons.forEach(person => {
+		_persons.forEach(person => {
 			let personMatched = true;
 			const searchWords = searchText.split(' ');
 			searchWords.forEach(searchWord => {
@@ -39,8 +39,8 @@ const PagePersons = () => {
 
 		const urlSearchText  = qsys.getParameterValueFromUrl('searchText');
 		if (urlSearchText !== '') {
-			_filteredPersons = searchAllPersons(urlSearchText); 
-			console.log(filteredPersons);
+			_filteredPersons = searchAllPersons(_initialPersons, urlSearchText);
+			setSearchText(urlSearchText);
 		}
 
 		setInitialPersons(_initialPersons);
@@ -57,7 +57,7 @@ const PagePersons = () => {
 		const searchText = e.target.value;
 		setSearchText(e.target.value);
 
-		const filteredPersons = searchAllPersons(searchText);
+		const filteredPersons = searchAllPersons([...initialPersons], searchText);
 		setFilteredPersons([...filteredPersons]);
 		if (filteredPersons.length === 1) {
 			setFilteredPerson(filteredPersons[0]);
