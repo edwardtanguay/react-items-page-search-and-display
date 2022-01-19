@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import rawPersonsFromJson from '../data/persons.json';
 
 // TODO: focus search box
@@ -7,17 +7,21 @@ const PagePersons = () => {
 	const [initialPersons, setInitialPersons] = useState([]);
 	const [filteredPersons, setFilteredPersons] = useState([]);
 	const [filteredPerson, setFilteredPerson] = useState({});
+	const inputSearchText = useRef(null);
 
 	useEffect(() => {
 		const initialPersons = rawPersonsFromJson.map(m => {
 			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
 			return m;
 		});
+
 		setInitialPersons(initialPersons);
 		setFilteredPersons(initialPersons); // API
 		if (initialPersons.length === 1) {
 			setFilteredPerson(initialPersons[0]);
 		}
+
+		inputSearchText.current.focus();
 
 	}, []);
 
@@ -48,6 +52,7 @@ const PagePersons = () => {
 		setFilteredPersons([person]);
 		setFilteredPerson(person);
 		setSearchText('');
+		inputSearchText.current.focus();
 	}
 
 	const showAllPersons = () => {
@@ -57,6 +62,7 @@ const PagePersons = () => {
 			setFilteredPerson(initialPersons[0]);
 		}
 		setSearchText('');
+		inputSearchText.current.focus();
 	}
 
 	// TODO: make it "1 Person" and "2 Persons"
@@ -75,7 +81,7 @@ const PagePersons = () => {
 			)}
 
 			<div className="searchArea">
-				<input type="text" autoFocus value={searchText} onChange={displaySearchResults} />
+				<input type="text" ref={inputSearchText} value={searchText} onChange={displaySearchResults} />
 			</div>
 
 			{/* MULTIPLE PERSONS */}
