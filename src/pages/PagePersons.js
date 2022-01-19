@@ -47,6 +47,7 @@ const PagePersons = () => {
 	const showSinglePerson = (person) => {
 		setFilteredPersons([person]);
 		setFilteredPerson(person);
+		setSearchText('');
 	}
 
 	// TODO: make it "1 Person" and "2 Persons"
@@ -54,7 +55,7 @@ const PagePersons = () => {
 		<div className="pagePersons">
 			{filteredPersons.length} Persons
 			<div className="searchArea">
-				<input type="text" onChange={displaySearchResults} />
+				<input type="text" value={searchText} onChange={displaySearchResults} />
 			</div>
 
 			{/* MULTIPLE PERSONS */}
