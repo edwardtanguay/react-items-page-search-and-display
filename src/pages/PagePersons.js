@@ -10,34 +10,6 @@ const PagePersons = () => {
 	const [filteredPerson, setFilteredPerson] = useState({});
 	const inputSearchText = useRef(null);
 
-	useEffect(() => {
-		const initialPersons = rawPersonsFromJson.map(m => {
-			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
-			return m;
-		});
-		let filteredPersons = [...initialPersons];
-
-		const urlId = Number(qsys.getParameterValueFromUrl('id'));
-		if (urlId !== 0) {
-			filteredPersons = initialPersons.filter(m => m.employeeID === urlId);
-		}
-
-		// const urlSearchText  = qsys.getParameterValueFromUrl('searchText');
-		// if (urlSearchText !== '') {
-		// 	filteredPersons = initialPersons.filter(m => m.employeeID === urlSearchText);
-		// }
-
-
-		setInitialPersons(initialPersons);
-		setFilteredPersons(filteredPersons); // API
-		if (filteredPersons.length === 1) {
-			setFilteredPerson(filteredPersons[0]);
-		}
-
-		inputSearchText.current.focus();
-
-	}, []);
-
 	const searchAllPersons = (searchText) => {
 		const foundPersons = [];
 		initialPersons.forEach(person => {
@@ -52,6 +24,34 @@ const PagePersons = () => {
 		});
 		return foundPersons;
 	}
+
+	useEffect(() => {
+		const _initialPersons = rawPersonsFromJson.map(m => {
+			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
+			return m;
+		});
+		let _filteredPersons = [..._initialPersons];
+
+		const urlId = Number(qsys.getParameterValueFromUrl('id'));
+		if (urlId !== 0) {
+			_filteredPersons = initialPersons.filter(m => m.employeeID === urlId);
+		}
+
+		const urlSearchText  = qsys.getParameterValueFromUrl('searchText');
+		if (urlSearchText !== '') {
+			_filteredPersons = searchAllPersons(urlSearchText); 
+			console.log(filteredPersons);
+		}
+
+		setInitialPersons(_initialPersons);
+		setFilteredPersons(_filteredPersons); // API
+		if (filteredPersons.length === 1) {
+			setFilteredPerson(filteredPersons[0]);
+		}
+
+		inputSearchText.current.focus();
+
+	}, []);
 
 	const displaySearchResults = (e) => {
 		const searchText = e.target.value;
