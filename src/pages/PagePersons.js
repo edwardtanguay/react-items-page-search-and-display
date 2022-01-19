@@ -9,7 +9,8 @@ const PagePersons = () => {
 				{persons.map((p, i) => {
 					return (
 						<div className="personCard">
-							<div className="title">{p.firstName} {p.lastName}</div>
+							<div className="fullName">{p.firstName} {p.lastName}</div>
+							<div className="title">{p.title}</div>
 						</div>
 					)
 				})}
