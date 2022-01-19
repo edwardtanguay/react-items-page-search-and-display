@@ -11,6 +11,7 @@ const PagePersons = () => {
 						<div className="personCard">
 							<div className="fullName">{p.firstName} {p.lastName}</div>
 							<div className="title">{p.title}</div>
+							<img src={`images/persons/${p.image}`} alt="" className="photo" />
 						</div>
 					)
 				})}
