@@ -1,7 +1,9 @@
+import persons from '../data/persons.json';
+
 const PagePersons = () => {
 	return (
 		<>
-			This is the persons page.
+			{persons.length} Persons
 		</>
 	)
 }
