@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import persons from '../data/persons.json';
+import rawPersons from '../data/persons.json';
 
 const PagePersons = () => {
 	const [searchText, setSearchText] = useState('');
+	const [persons, setPersons] = useState(rawPersons);
 
 	const displaySearchResults = (e) => {
 		const searchText = e.target.value;
@@ -18,7 +19,6 @@ const PagePersons = () => {
 
 	return (
 		<div className="pagePersons">
-			[{searchText}]
 			{persons.length} Persons
 			<div className="searchArea">
 				<input type="text" onChange={displaySearchResults} />
