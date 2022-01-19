@@ -17,9 +17,19 @@ const PagePersons = () => {
 
 	const displaySearchResults = (e) => {
 		const searchText = e.target.value;
-		setSearchText(searchText);
+		setSearchText(e.target.value);
 
-		setFilteredPersons([...initialPersons.filter(m => m.searchText.toUpperCase().includes(searchText.toUpperCase()))]);
+		const searchWords = searchText.split(' ');
+
+		const filteredPersons = [];
+		initialPersons.forEach(person => {
+			if (person.searchText.toUpperCase().includes(searchText.toUpperCase())) {
+				filteredPersons.push(person);
+			}
+		});
+		setFilteredPersons([...filteredPersons]);
+
+		// setFilteredPersons([...initialPersons.filter(m => m.searchText.toUpperCase().includes(searchText.toUpperCase()))]);
 	}
 
 	return (
