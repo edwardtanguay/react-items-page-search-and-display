@@ -68,6 +68,20 @@ body {
 			}
 			margin-bottom: 20px;
 		}
+		.spinner {
+			font-size: 3rem;
+			color: #444;
+			animation: spin infinite 2s linear;
+		}
+
+		@keyframes spin {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
 	}
 }
 

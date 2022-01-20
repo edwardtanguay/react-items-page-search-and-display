@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from 'react';
-import rawItemsFromJson from '../data/customers.json';
 import * as qsys from '../qtools/qsys';
 import { useMediaQuery } from 'react-responsive';
 import '../styles/pageItems.scss';
 import '../styles/pageCustomers.scss';
+import { FaSpinner } from 'react-icons/fa';
 
 // TODO: test bad urls e.g. customers?id=undefined
 
 const itemNamePlural = 'Customers';
-// https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json
 
 const PageCustomers = () => {
 	const [searchText, setSearchText] = useState('');
@@ -54,35 +53,42 @@ const PageCustomers = () => {
 	}
 
 	useEffect(() => {
-		const _initialItems = rawItemsFromJson.map(m => {
-			m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
-			return m;
-		});
-		let _filteredItems = [..._initialItems];
 
-		const urlId = qsys.getParameterValueFromUrl('id');
-		console.log(urlId);
-		if (urlId !== '') {
-			_filteredItems = _initialItems.filter(m => m.customerID === urlId);
-			updateUrlWithId(_filteredItems[0]);
-		}
+		setTimeout(async () => {
 
-		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
-		if (urlSearchText !== '') {
-			_filteredItems = searchAllItems(_initialItems, urlSearchText);
-			setSearchText(urlSearchText);
-			updateUrlWithSearchText(urlSearchText);
-		}
+			const response = await fetch('https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json');
+			const rawItemsFromJson = await response.json();
 
-		setInitialItems(_initialItems);
-		setFilteredItems(_filteredItems);
-		if (_filteredItems.length === 1) {
-			setFilteredItem(_filteredItems[0]);
-		}
+			const _initialItems = rawItemsFromJson.map(m => {
+				m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
+				return m;
+			});
+			let _filteredItems = [..._initialItems];
 
-		if (!isSmartphone) {
-			inputSearchText.current.focus();
-		}
+			const urlId = qsys.getParameterValueFromUrl('id');
+			console.log(urlId);
+			if (urlId !== '') {
+				_filteredItems = _initialItems.filter(m => m.customerID === urlId);
+				updateUrlWithId(_filteredItems[0]);
+			}
+
+			const urlSearchText = qsys.getParameterValueFromUrl('searchText');
+			if (urlSearchText !== '') {
+				_filteredItems = searchAllItems(_initialItems, urlSearchText);
+				setSearchText(urlSearchText);
+				updateUrlWithSearchText(urlSearchText);
+			}
+
+			setInitialItems(_initialItems);
+			setFilteredItems(_filteredItems);
+			if (_filteredItems.length === 1) {
+				setFilteredItem(_filteredItems[0]);
+			}
+
+			if (!isSmartphone) {
+				inputSearchText.current.focus();
+			}
+		}, 1000);
 
 	}, []);
 
@@ -137,12 +143,19 @@ const PageCustomers = () => {
 					</div>
 				)}
 
-				{filteredItems.length === initialItems.length && (
+				{filteredItems.length === initialItems.length && filteredItems.length !== 0 && (
 					<div>
 						<div>{initialItems.length} {itemNamePlural}</div>
 					</div>
 				)}
+
+				{filteredItems.length === 0 && (
+					<div className="pageLoadingArea">
+						<FaSpinner className="spinner" />
+					</div>
+				)}
 			</div>
+
 
 			<div className="searchArea">
 				<input type="text" ref={inputSearchText} placeholder="SEARCH" value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
@@ -179,8 +192,8 @@ const PageCustomers = () => {
 								<div className="phone">{filteredItem.address.phone}</div>
 							</div>
 							<div className="notes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem!
-							Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores?
-							Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?</div>
+								Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores?
+								Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?</div>
 						</div>
 					</div>
 					<div className="clear"></div>
