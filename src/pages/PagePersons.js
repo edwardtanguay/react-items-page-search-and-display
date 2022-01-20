@@ -148,7 +148,7 @@ const PagePersons = () => {
 							<div className="personCard" key={i}>
 								<div className="fullName">{p.firstName} {p.lastName}</div>
 								<div className="title">{p.title}</div>
-								<img src={`images/persons/${p.image}`} alt="" className="photo" onClick={() => showSinglePerson(p)} />
+								<img src={`images/persons/employee_${p.employeeID}.jpg`} alt="" className="photo" onClick={() => showSinglePerson(p)} />
 							</div>
 						)
 					})}
@@ -159,7 +159,7 @@ const PagePersons = () => {
 			{filteredPersons.length === 1 && (
 				<div className="singlePersonCard">
 					<div className="innerArea">
-						<img src={`images/persons/${filteredPerson.image}`} alt="person" className="photo" />
+						<img src={`images/persons/employee_${filteredPerson.employeeID}.jpg`} alt="person" className="photo" />
 						<div className="info">
 							<div className="fullName">{filteredPerson.firstName} {filteredPerson.lastName}</div>
 							<div className="title">{filteredPerson.title}</div>
