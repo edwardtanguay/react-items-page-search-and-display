@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from 'react';
-import rawEmployeesFromJson from '../data/employees.json';
+import rawItemsFromJson from '../data/customers.json';
 import * as qsys from '../qtools/qsys';
 import { useMediaQuery } from 'react-responsive';
 
 // https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json
 
-const PageEmployees = () => {
+const PageCustomers = () => {
 	const [searchText, setSearchText] = useState('');
-	const [initialEmployees, setInitialEmployees] = useState([]);
-	const [filteredEmployees, setFilteredEmployees] = useState([]);
-	const [filteredEmployee, setFilteredEmployee] = useState({});
+	const [initialItems, setInitialItems] = useState([]);
+	const [filteredItems, setFilteredItems] = useState([]);
+	const [filteredItem, setFilteredItem] = useState({});
 	const inputSearchText = useRef(null);
 
 	const isSmartphone = useMediaQuery({
@@ -18,60 +18,60 @@ const PageEmployees = () => {
 	});
 
 	const updateUrlBase = () => {
-		qsys.changeBrowserState(document, 'employees', '', '', `All Employees`);
+		qsys.changeBrowserState(document, 'customers', '', '', `All Customers`);
 	}
 
-	const updateUrlWithId = (employee) => {
-		qsys.changeBrowserState(document, 'employees', 'id', employee.employeeID, `Employee: ${employee.firstName} ${employee.lastName}`);
+	const updateUrlWithId = (item) => {
+		qsys.changeBrowserState(document, 'customers', 'id', item.itemID, `Customer: ${item.firstName} ${item.lastName}`);
 	};
 
 	const updateUrlWithSearchText = (searchText) => {
 		if (searchText.trim() === '') {
 			updateUrlBase();
 		} else {
-			qsys.changeBrowserState(document, 'employees', 'searchText', searchText, `Employee Search: "${searchText}"`);
+			qsys.changeBrowserState(document, 'customers', 'searchText', searchText, `Customer Search: "${searchText}"`);
 		}
 	};
 
-	const searchAllEmployees = (_employees, searchText) => {
-		const foundEmployees = [];
-		_employees.forEach(employee => {
-			let employeeMatched = true;
+	const searchAllItems = (_items, searchText) => {
+		const foundItems = [];
+		_items.forEach(item => {
+			let itemMatched = true;
 			const searchWords = searchText.split(' ');
 			searchWords.forEach(searchWord => {
-				if (!employee.bulkSearchText.toUpperCase().includes(searchWord.toUpperCase())) {
-					employeeMatched = false;
+				if (!item.bulkSearchText.toUpperCase().includes(searchWord.toUpperCase())) {
+					itemMatched = false;
 				}
 			});
-			if (employeeMatched) foundEmployees.push(employee);
+			if (itemMatched) foundItems.push(item);
 		});
-		return foundEmployees;
+		return foundItems;
 	}
 
 	useEffect(() => {
-		const _initialEmployees = rawEmployeesFromJson.map(m => {
+		const _initialItems = rawItemsFromJson.map(m => {
 			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
 			return m;
 		});
-		let _filteredEmployees = [..._initialEmployees];
+		let _filteredItems = [..._initialItems];
 
 		const urlId = Number(qsys.getParameterValueFromUrl('id'));
 		if (urlId !== 0) {
-			_filteredEmployees = _initialEmployees.filter(m => m.employeeID === urlId);
-			updateUrlWithId(_filteredEmployees[0]);
+			_filteredItems = _initialItems.filter(m => m.itemID === urlId);
+			updateUrlWithId(_filteredItems[0]);
 		}
 
 		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
 		if (urlSearchText !== '') {
-			_filteredEmployees = searchAllEmployees(_initialEmployees, urlSearchText);
+			_filteredItems = searchAllItems(_initialItems, urlSearchText);
 			setSearchText(urlSearchText);
 			updateUrlWithSearchText(urlSearchText);
 		}
 
-		setInitialEmployees(_initialEmployees);
-		setFilteredEmployees(_filteredEmployees); // API
-		if (_filteredEmployees.length === 1) {
-			setFilteredEmployee(_filteredEmployees[0]);
+		setInitialItems(_initialItems);
+		setFilteredItems(_filteredItems); 
+		if (_filteredItems.length === 1) {
+			setFilteredItem(_filteredItems[0]);
 		}
 
 		if (!isSmartphone) {
@@ -82,29 +82,29 @@ const PageEmployees = () => {
 
 	const displaySearchResults = (e) => {
 		const searchText = e.target.value;
-		if (searchText.trim() !== '' || filteredEmployees.length > 0) {
+		if (searchText.trim() !== '' || filteredItems.length > 0) {
 			setSearchText(e.target.value);
 
-			const filteredEmployees = searchAllEmployees([...initialEmployees], searchText);
-			setFilteredEmployees([...filteredEmployees]);
-			if (filteredEmployees.length === 1) {
-				setFilteredEmployee(filteredEmployees[0]);
+			const filteredItems = searchAllItems([...initialItems], searchText);
+			setFilteredItems([...filteredItems]);
+			if (filteredItems.length === 1) {
+				setFilteredItem(filteredItems[0]);
 			}
 			updateUrlWithSearchText(searchText);
 		}
 	}
 
-	const showSingleEmployee = (employee) => {
-		setFilteredEmployees([employee]);
-		setFilteredEmployee(employee);
-		updateUrlWithId(employee);
+	const showSingleItem = (item) => {
+		setFilteredItems([item]);
+		setFilteredItem(item);
+		updateUrlWithId(item);
 	}
 
-	const showAllEmployees = () => {
-		setInitialEmployees(initialEmployees);
-		setFilteredEmployees(initialEmployees);
-		if (initialEmployees.length === 1) {
-			setFilteredEmployee(initialEmployees[0]);
+	const showAllItems = () => {
+		setInitialItems(initialItems);
+		setFilteredItems(initialItems);
+		if (initialItems.length === 1) {
+			setFilteredItem(initialItems[0]);
 		}
 		setSearchText('');
 		updateUrlBase();
@@ -116,24 +116,24 @@ const PageEmployees = () => {
 	}
 
 	return (
-		<div className="pageEmployees">
+		<div className="pageItems">
 
 			<div className="totalHeader">
-				{filteredEmployees.length > 1 && filteredEmployees.length < initialEmployees.length && (
+				{filteredItems.length > 1 && filteredItems.length < initialItems.length && (
 					<div>
-						{filteredEmployees.length} of <span className="allEmployeesLink" onClick={showAllEmployees}>{initialEmployees.length} Employees</span>
+						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} Items</span>
 					</div>
 				)}
 
-				{filteredEmployees.length === 1 && (
+				{filteredItems.length === 1 && (
 					<div>
-						1 of <span className="allEmployeesLink" onClick={showAllEmployees}>{initialEmployees.length} Employees</span>
+						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} Items</span>
 					</div>
 				)}
 
-				{filteredEmployees.length === initialEmployees.length && (
+				{filteredItems.length === initialItems.length && (
 					<div>
-						<div>{initialEmployees.length} Employees</div>
+						<div>{initialItems.length} Items</div>
 					</div>
 				)}
 			</div>
@@ -143,14 +143,14 @@ const PageEmployees = () => {
 			</div>
 
 			{/* MULTIPLE EMPLOYEES */}
-			{filteredEmployees.length > 1 && (
-				<div className="employeesArea">
-					{filteredEmployees.map((p, i) => {
+			{filteredItems.length > 1 && (
+				<div className="itemsArea">
+					{filteredItems.map((p, i) => {
 						return (
-							<div className="employeeCard" key={i}>
+							<div className="itemCard" key={i}>
 								<div className="fullName">{p.firstName} {p.lastName}</div>
 								<div className="title">{p.title}</div>
-								<img src={`images/employees/employee_${p.employeeID}.jpg`} alt="" className="photo" onClick={() => showSingleEmployee(p)} />
+								<img src={`images/items/item_${p.itemID}.jpg`} alt="" className="photo" onClick={() => showSingleItem(p)} />
 							</div>
 						)
 					})}
@@ -158,14 +158,14 @@ const PageEmployees = () => {
 			)}
 
 			{/* SINGLE EMPLOYEE */}
-			{filteredEmployees.length === 1 && (
-				<div className="singleEmployeeCard">
+			{filteredItems.length === 1 && (
+				<div className="singleItemCard">
 					<div className="innerArea">
-						<img src={`images/employees/employee_${filteredEmployee.employeeID}.jpg`} alt="employee" className="photo" />
+						<img src={`images/items/item_${filteredItem.itemID}.jpg`} alt="item" className="photo" />
 						<div className="info">
-							<div className="fullName">{filteredEmployee.firstName} {filteredEmployee.lastName}</div>
-							<div className="title">{filteredEmployee.title}</div>
-							<div className="notes">{filteredEmployee.notes}</div>
+							<div className="fullName">{filteredItem.firstName} {filteredItem.lastName}</div>
+							<div className="title">{filteredItem.title}</div>
+							<div className="notes">{filteredItem.notes}</div>
 						</div>
 					</div>
 					<div className="clear"></div>
@@ -176,4 +176,4 @@ const PageEmployees = () => {
 	)
 }
 
-export default PageEmployees;
+export default PageCustomers;
