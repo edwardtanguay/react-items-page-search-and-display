@@ -1,3 +1,4 @@
+import '../styles/pageHome.scss';
 // TODO: highlight words that were searched
 const PageHome = () => {
 	return (

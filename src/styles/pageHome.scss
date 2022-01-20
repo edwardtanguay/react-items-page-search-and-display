@@ -1,0 +1,18 @@
+div.pageHome {
+	ul {
+		margin-left: 45px;
+	}
+}
+
+/* smartphone view */
+@media (max-width: 577px) {
+	div.pageHome {
+		padding: 10px 20px;
+		ul {
+			margin-left: 45px;
+			li {
+				line-height: 1.3rem;
+			}
+		}
+	}
+}
