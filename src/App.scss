@@ -22,6 +22,13 @@ body {
 		h1:not(:first-of-type) {
 			margin-top: 20px;
 		}
+		code {
+			color: brown;
+			background: #f8f8f8;
+			display: inline-block;
+			padding-right: 6px;
+			padding-left: 6px;
+		}
 		strong {
 			color: rgb(46, 15, 15);
 		}
@@ -153,7 +160,8 @@ body {
 /* smartphone view */
 @media (max-width: 577px) {
 	body {
-		padding: 0;
+		padding: 0 0 30px 0;
+		overflow-x: hidden;
 		.App {
 			nav {
 				width: 100%;
@@ -164,8 +172,14 @@ body {
 					font-size: 1.1rem;
 				}
 			}
-			div.pageWelcome {
+			div.pageHome {
 				padding: 10px 20px;
+				ul {
+					margin-left: 45px;
+					li {
+						line-height: 1.3rem;
+					}
+				}
 			}
 			div.pagePersons {
 				padding: 0;

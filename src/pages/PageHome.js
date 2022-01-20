@@ -9,8 +9,26 @@ const PageHome = () => {
 			</ul>
 
 			<h2>Page: Employees</h2>
+			<ul>
+				<li>loads from JSON file</li>
+				<li>variables are named specifically, i.e. with the word <code>employee</code> instead of <code>item</code></li>
+				<li>all functions are self-contained on the page</li>
+			</ul>
+
 			<h2>Page: Customers</h2>
+			<ul>
+				<li>loads from API</li>
+				<li>variables are named generically with the word <code>item</code></li>
+				<li>many functions for this page are imported and shared with the suppliers page</li>
+			</ul>
+
 			<h2>Page: Suppliers</h2>
+			<ul>
+				<li>loads from API</li>
+				<li>variables are named generically with the word <code>item</code></li>
+				<li>many functions for this page are imported and shared with the customers page</li>
+			</ul>
+
 		</div>
 	)
 }
