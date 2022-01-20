@@ -22,9 +22,24 @@ body {
 		h1:not(:first-of-type) {
 			margin-top: 20px;
 		}
+		strong {
+			color: rgb(46, 15, 15);
+		}
 		ul {
 			list-style-type: disc;
 			margin: 0 0 0 30px;
+		}
+		p {
+			line-height: 2rem;
+		}
+		h1 {
+			margin-bottom: 10px;
+			font-size: 1.8rem;
+		}
+		h2 {
+			margin-top: 20px;
+			font-size: 1.6rem;
+			max-width: 500px;
 		}
 		nav {
 			background-color: #333;
@@ -49,6 +64,12 @@ body {
 			margin-bottom: 20px;
 		}
 	}
+	div.pageHome {
+		ul {
+			margin-left: 45px;
+		}
+	}
+
 	div.pagePersons {
 		span.allPersonsLink {
 			text-decoration: underline;
