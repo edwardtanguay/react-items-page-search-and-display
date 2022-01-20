@@ -1,73 +1,111 @@
 $item_card_background: rgb(236, 229, 176);
 
-div.itemCard {
-	width: 300px;
-	background: $item_card_background;
-	margin: 0 10px 10px 0;
-	padding: 10px 15px 5px 10px;
-	border-radius: 5px;
-	box-shadow: 7px 5px 15px -8px #000000;
-	div.fullName {
-		font-size: 1.5rem;
-	}
-	div.title {
-		font-size: 1.1rem;
-		font-style: italic;
-		color: brown;
-	}
-	div.companyName {
-		font-size: 1.1rem;
-		color:#555; 
-		font-variant: small-caps;
-	}
-	img.photo {
+div.pageCustomers {
+	div.itemCard {
 		width: 300px;
-		margin: 10px 5px 2px 3px;
-		cursor: pointer;
+		background: $item_card_background;
+		margin: 0 10px 10px 0;
+		padding: 10px 15px 5px 10px;
+		border-radius: 5px;
+		box-shadow: 7px 5px 15px -8px #000000;
+		div.fullName {
+			font-size: 1.5rem;
+		}
+		div.title {
+			font-size: 1.1rem;
+			font-style: italic;
+			color: brown;
+		}
+		div.companyName {
+			font-size: 1.1rem;
+			color: #555;
+			font-variant: small-caps;
+		}
+		img.photo {
+			width: 300px;
+			margin: 10px 5px 2px 3px;
+			cursor: pointer;
+		}
+	}
+
+	div.singleItemCard {
+		background: #eee;
+		padding: 20px;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		margin: 0 0 20px 0;
+		max-width: 700px;
+		min-height: 212px;
+		box-shadow: 7px 5px 15px -8px #000000;
+		background: $item_card_background;
+		div.fullName {
+			font-size: 2.5rem;
+		}
+		div.title {
+			font-size: 2.1rem;
+			font-style: italic;
+			color: brown;
+		}
+		div.innerArea {
+			div.info {
+				padding: 0 10px 0 0;
+			}
+			img {
+				width: 200px;
+				float: right;
+				margin: 0 0 0 20px;
+			}
+			.clear {
+				clear: both;
+			}
+		}
+		div.notes {
+			margin: 10px 0 0 0;
+		}
 	}
 }
 
 /* smartphone view */
 @media (max-width: 577px) {
-			div.itemCard {
-				width: 100%;
-				border-radius: 0;
-				padding: 15px;
-				box-shadow: none;
-				div.fullName {
-					font-size: 1.9rem;
-				}
-				div.title {
-					font-size: 1.5rem;
-					font-style: italic;
-					color: brown;
-				}
-				img {
-					width: 90%;
-				}
+	div.itemCard {
+		width: 100%;
+		border-radius: 0;
+		padding: 15px;
+		box-shadow: none;
+		div.fullName {
+			font-size: 1.9rem;
+		}
+		div.title {
+			font-size: 1.5rem;
+			font-style: italic;
+			color: brown;
+		}
+		img {
+			width: 90%;
+		}
+	}
+	div.singleItemCard {
+		box-shadow: none;
+		min-height: none;
+		div.fullName {
+			font-size: 1.7rem;
+		}
+		div.title {
+			font-size: 1.2rem;
+		}
+		div.notes {
+			font-size: 1.1rem;
+		}
+		div.innerArea {
+			display: block;
+			img {
+				width: 130px;
+				float: right;
+				margin: 0 10px 0 20px;
 			}
-		div.singleItemCard {
-			box-shadow: none;
-			min-height: none;
-			div.fullName {
-				font-size: 1.7rem;
-			}
-			div.title {
-				font-size: 1.2rem;
-			}
-			div.notes {
-				font-size: 1.1rem;
-			}
-			div.innerArea {
-				display: block;
-				img {
-					width: 130px;
-					float: right;
-					margin: 0 10px 0 20px;
-				}
-				.clear {
-					clear: both;
-				}
+			.clear {
+				clear: both;
 			}
 		}
 	}
+}

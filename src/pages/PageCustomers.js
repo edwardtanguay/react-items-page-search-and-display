@@ -6,6 +6,8 @@ import { useMediaQuery } from 'react-responsive';
 import '../styles/pageItems.scss';
 import '../styles/pageCustomers.scss';
 
+// TODO: test bad urls e.g. customers?id=undefined
+
 const itemNamePlural = 'Customers';
 // https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json
 
@@ -72,7 +74,7 @@ const PageCustomers = () => {
 		}
 
 		setInitialItems(_initialItems);
-		setFilteredItems(_filteredItems); 
+		setFilteredItems(_filteredItems);
 		if (_filteredItems.length === 1) {
 			setFilteredItem(_filteredItems[0]);
 		}
@@ -119,7 +121,7 @@ const PageCustomers = () => {
 	}
 
 	return (
-		<div className="pageItems">
+		<div className="pageItems pageCustomers">
 
 			<div className="totalHeader">
 				{filteredItems.length > 1 && filteredItems.length < initialItems.length && (
@@ -165,9 +167,9 @@ const PageCustomers = () => {
 			{filteredItems.length === 1 && (
 				<div className="singleItemCard">
 					<div className="innerArea">
-						<img src={`images/items/item_${filteredItem.itemID}.jpg`} alt="item" className="photo" />
+						<img src={`images/customers/customer_test.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 						<div className="info">
-							<div className="fullName">{filteredItem.firstName} {filteredItem.lastName}</div>
+							<div className="fullName">{filteredItem.contactName} {filteredItem.lastName}</div>
 							<div className="title">{filteredItem.title}</div>
 							<div className="notes">{filteredItem.notes}</div>
 						</div>
