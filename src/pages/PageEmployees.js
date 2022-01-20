@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import rawEmployeesFromJson from '../data/employees.json';
 import * as qsys from '../qtools/qsys';
 import { useMediaQuery } from 'react-responsive';
+import '../styles/pageEmployees.scss';
 
 const PageEmployees = () => {
 	const [searchText, setSearchText] = useState('');

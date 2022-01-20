@@ -1,4 +1,4 @@
-import './App.scss';
+import './styles/App.scss';
 import { Routes, Route } from 'react-router-dom';
 import PageWelcome from './pages/PageHome';
 import PageEmployees from './pages/PageEmployees';
