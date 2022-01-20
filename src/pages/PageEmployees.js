@@ -107,9 +107,9 @@ const PageEmployees = () => {
 		setSearchText('');
 		updateUrlBase();
 		setTimeout(() => {
-		if (!isSmartphone) {
-			inputSearchText.current.focus();
-		}
+			if (!isSmartphone) {
+				inputSearchText.current.focus();
+			}
 		}, 100);
 	}
 
