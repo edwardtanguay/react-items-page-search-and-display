@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import rawItemsFromJson from '../data/customers.json';
 import * as qsys from '../qtools/qsys';
 import { useMediaQuery } from 'react-responsive';
+import '../styles/pageCustomers.scss';
 
 // https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json
 
