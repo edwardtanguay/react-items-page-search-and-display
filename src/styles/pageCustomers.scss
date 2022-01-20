@@ -2,7 +2,7 @@ $item_card_background: rgb(236, 229, 176);
 
 div.pageCustomers {
 	div.itemCard {
-		width: 300px;
+		width: 250px;
 		background: $item_card_background;
 		margin: 0 10px 10px 0;
 		padding: 10px 15px 5px 10px;
@@ -22,7 +22,7 @@ div.pageCustomers {
 			font-variant: small-caps;
 		}
 		img.photo {
-			width: 300px;
+			width: 250px;
 			margin: 10px 5px 2px 3px;
 			cursor: pointer;
 		}
