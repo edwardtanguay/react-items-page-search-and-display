@@ -46,6 +46,18 @@ div.pageCustomers {
 			font-style: italic;
 			color: brown;
 		}
+		div.companyName {
+			font-size: 2.5rem;
+			color: #555;
+			font-variant: small-caps;
+		}
+		div.address {
+			margin: 10px 0 0 0;
+		}
+		div.notes {
+			font-style: italic;
+			color: #333;
+		}
 		div.innerArea {
 			div.info {
 				padding: 0 10px 0 0;
@@ -53,7 +65,7 @@ div.pageCustomers {
 			img {
 				width: 200px;
 				float: right;
-				margin: 0 0 0 20px;
+				margin: 0 0 20px 20px;
 			}
 			.clear {
 				clear: both;

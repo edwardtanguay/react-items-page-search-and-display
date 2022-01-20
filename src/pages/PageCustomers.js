@@ -27,7 +27,7 @@ const PageCustomers = () => {
 	}
 
 	const updateUrlWithId = (item) => {
-		qsys.changeBrowserState(document, 'customers', 'id', item.itemID, `Customer: ${item.contactName}`);
+		qsys.changeBrowserState(document, 'customers', 'id', item.customerID, `Customer: ${item.contactName}`);
 	};
 
 	const updateUrlWithSearchText = (searchText) => {
@@ -60,9 +60,10 @@ const PageCustomers = () => {
 		});
 		let _filteredItems = [..._initialItems];
 
-		const urlId = Number(qsys.getParameterValueFromUrl('id'));
-		if (urlId !== 0) {
-			_filteredItems = _initialItems.filter(m => m.itemID === urlId);
+		const urlId = qsys.getParameterValueFromUrl('id');
+		console.log(urlId);
+		if (urlId !== '') {
+			_filteredItems = _initialItems.filter(m => m.customerID === urlId);
 			updateUrlWithId(_filteredItems[0]);
 		}
 
@@ -169,9 +170,17 @@ const PageCustomers = () => {
 					<div className="innerArea">
 						<img src={`images/customers/customer_test.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 						<div className="info">
-							<div className="fullName">{filteredItem.contactName} {filteredItem.lastName}</div>
-							<div className="title">{filteredItem.title}</div>
-							<div className="notes">{filteredItem.notes}</div>
+							<div className="fullName">{filteredItem.contactName}</div>
+							<div className="title">{filteredItem.contactTitle}</div>
+							<div className="companyName">{filteredItem.companyName}</div>
+							<div className="address">
+								<div className="street">{filteredItem.address.street}</div>
+								<div className="cityLine">{filteredItem.address.city} {filteredItem.postalCode} {filteredItem.address.country}</div>
+								<div className="phone">{filteredItem.address.phone}</div>
+							</div>
+							<div className="notes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem!
+							Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores?
+							Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?</div>
 						</div>
 					</div>
 					<div className="clear"></div>
