@@ -77,16 +77,16 @@ body {
 		}
 	}
 
-	div.pagePersons {
-		span.allPersonsLink {
+	div.pageEmployees {
+		span.allEmployeesLink {
 			text-decoration: underline;
 			cursor: pointer;
 		}
-		div.personsArea {
+		div.employeesArea {
 			display: flex;
 			flex-wrap: wrap;
 			max-width: 1100px;
-			div.personCard {
+			div.employeeCard {
 				width: 200px;
 				background: $employee_card_background;
 				margin: 0 10px 10px 0;
@@ -120,7 +120,7 @@ width: 200px;
 				color: #ccc;
 			}
 		}
-		div.singlePersonCard {
+		div.singleEmployeeCard {
 			background: #eee;
 			padding: 20px;
 			border: 1px solid #ddd;
@@ -182,16 +182,16 @@ width: 200px;
 					}
 				}
 			}
-			div.pagePersons {
+			div.pageEmployees {
 				padding: 0;
 				div.totalHeader {
 					margin: -5px 0 0 20px;
 				}
-				div.personsArea {
+				div.employeesArea {
 					display: block;
 					padding: 0;
 					margin: 0;
-					div.personCard {
+					div.employeeCard {
 						width: 100%;
 						border-radius: 0;
 						padding: 15px;
@@ -214,7 +214,7 @@ width: 200px;
 						width: 90%;
 					}
 				}
-				div.singlePersonCard {
+				div.singleEmployeeCard {
 					box-shadow: none;
 					min-height: none;
 					div.fullName {

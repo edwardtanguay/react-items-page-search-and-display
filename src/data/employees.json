@@ -1,8 +1,6 @@
-
 [
 	{
 		"employeeID" : 2,
-		"image": "person001.jpg",
 		"lastName" : "Fuller",
 		"firstName" : "Andrew",
 		"title" : "Vice President Sales",
@@ -31,7 +29,6 @@
 	},
 	{
 		"employeeID" : 5,
-		"image": "person002.jpg",
 		"lastName" : "Buchanan",
 		"firstName" : "Steven",
 		"title" : "Sales Manager",
@@ -60,7 +57,6 @@
 	},
 	{
 		"employeeID" : 1,
-		"image": "person003.jpg",
 		"lastName" : "Davolio",
 		"firstName" : "Nancy",
 		"title" : "Sales Representative",
@@ -84,7 +80,6 @@
 	},
 	{
 		"employeeID" : 3,
-		"image": "person004.jpg",
 		"lastName" : "Leverling",
 		"firstName" : "Janet",
 		"title" : "Sales Representative",
@@ -110,7 +105,6 @@
 	},
 	{
 		"employeeID" : 4,
-		"image": "person005.jpg",
 		"lastName" : "Peacock",
 		"firstName" : "Margaret",
 		"title" : "Sales Representative",
@@ -135,7 +129,6 @@
 	},
 	{
 		"employeeID" : 6,
-		"image": "person006.jpg",
 		"lastName" : "Suyama",
 		"firstName" : "Michael",
 		"title" : "Sales Representative",
@@ -162,7 +155,6 @@
 	},
 	{
 		"employeeID" : 7,
-		"image": "person007.jpg",
 		"lastName" : "King",
 		"firstName" : "Robert",
 		"title" : "Sales Representative",
@@ -194,7 +186,6 @@
 	},
 	{
 		"employeeID" : 8,
-		"image": "person008.jpg",
 		"lastName" : "Callahan",
 		"firstName" : "Laura",
 		"title" : "Inside Sales Coordinator",
@@ -220,7 +211,6 @@
 	},
 	{
 		"employeeID" : 9,
-		"image": "person009.jpg",
 		"lastName" : "Dodsworth",
 		"firstName" : "Anne",
 		"title" : "Sales Representative",
