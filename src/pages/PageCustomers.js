@@ -61,6 +61,7 @@ const PageCustomers = () => {
 
 			const _initialItems = rawItemsFromJson.map(m => {
 				m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
+				m.notes = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem! Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores? Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?';
 				return m;
 			});
 			let _filteredItems = [..._initialItems];
@@ -150,7 +151,7 @@ const PageCustomers = () => {
 
 				{filteredItems.length === 0 && (
 					<div className="pageLoadingArea">
-						<FaSpinner className="spinner" />
+						<div>Loading {itemNamePlural.toLowerCase()}... <FaSpinner className="spinner" /> </div>
 					</div>
 				)}
 			</div>
@@ -190,9 +191,7 @@ const PageCustomers = () => {
 								<div className="cityLine">{filteredItem.address.city} {filteredItem.postalCode} {filteredItem.address.country}</div>
 								<div className="phone">{filteredItem.address.phone}</div>
 							</div>
-							<div className="notes">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem!
-								Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores?
-								Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?</div>
+							<div className="notes">{filteredItem.notes}</div>
 						</div>
 					</div>
 					<div className="clear"></div>
