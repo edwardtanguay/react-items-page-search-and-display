@@ -1,3 +1,4 @@
+// TODO: highlight words that were searched
 const PageHome = () => {
 	return (
 		<div className="pageHome">
