@@ -66,7 +66,6 @@ const PageCustomers = () => {
 			let _filteredItems = [..._initialItems];
 
 			const urlId = qsys.getParameterValueFromUrl('id');
-			console.log(urlId);
 			if (urlId !== '') {
 				_filteredItems = _initialItems.filter(m => m.customerID === urlId);
 				updateUrlWithId(_filteredItems[0]);
