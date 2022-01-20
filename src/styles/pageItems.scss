@@ -1,0 +1,45 @@
+$item_card_background: rgb(213, 231, 213);
+
+div.pageItems {
+	span.allItemsLink {
+		text-decoration: underline;
+		cursor: pointer;
+	}
+	div.itemsArea {
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 1100px;
+	}
+	div.searchArea {
+		background: #ddd;
+		padding: 15px;
+		margin: 10px 0 20px 0;
+		input {
+			font-size: 1.5rem;
+			width: 300px;
+		}
+		::placeholder {
+			color: #ccc;
+		}
+	}
+}
+
+/* smartphone view */
+@media (max-width: 577px) {
+	div.pageItems {
+		padding: 0;
+		div.totalHeader {
+			margin: -5px 0 0 20px;
+		}
+		div.itemsArea {
+			display: block;
+			padding: 0;
+			margin: 0;
+		}
+		div.searchArea {
+			input {
+				width: 90%;
+			}
+		}
+	}
+}

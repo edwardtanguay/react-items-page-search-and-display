@@ -3,8 +3,10 @@ import { useState, useRef, useEffect } from 'react';
 import rawItemsFromJson from '../data/customers.json';
 import * as qsys from '../qtools/qsys';
 import { useMediaQuery } from 'react-responsive';
+import '../styles/pageItems.scss';
 import '../styles/pageCustomers.scss';
 
+const itemNamePlural = 'Customers';
 // https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json
 
 const PageCustomers = () => {
@@ -23,7 +25,7 @@ const PageCustomers = () => {
 	}
 
 	const updateUrlWithId = (item) => {
-		qsys.changeBrowserState(document, 'customers', 'id', item.itemID, `Customer: ${item.firstName} ${item.lastName}`);
+		qsys.changeBrowserState(document, 'customers', 'id', item.itemID, `Customer: ${item.contactName}`);
 	};
 
 	const updateUrlWithSearchText = (searchText) => {
@@ -51,7 +53,7 @@ const PageCustomers = () => {
 
 	useEffect(() => {
 		const _initialItems = rawItemsFromJson.map(m => {
-			m.bulkSearchText = `${m.firstName}|${m.lastName}|${m.title}|${m.notes}`;
+			m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
 			return m;
 		});
 		let _filteredItems = [..._initialItems];
@@ -122,19 +124,19 @@ const PageCustomers = () => {
 			<div className="totalHeader">
 				{filteredItems.length > 1 && filteredItems.length < initialItems.length && (
 					<div>
-						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} Items</span>
+						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {itemNamePlural}</span>
 					</div>
 				)}
 
 				{filteredItems.length === 1 && (
 					<div>
-						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} Items</span>
+						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {itemNamePlural}</span>
 					</div>
 				)}
 
 				{filteredItems.length === initialItems.length && (
 					<div>
-						<div>{initialItems.length} Items</div>
+						<div>{initialItems.length} {itemNamePlural}</div>
 					</div>
 				)}
 			</div>
@@ -149,9 +151,10 @@ const PageCustomers = () => {
 					{filteredItems.map((p, i) => {
 						return (
 							<div className="itemCard" key={i}>
-								<div className="fullName">{p.firstName} {p.lastName}</div>
-								<div className="title">{p.title}</div>
-								<img src={`images/items/item_${p.itemID}.jpg`} alt="" className="photo" onClick={() => showSingleItem(p)} />
+								<div className="fullName">{p.contactName}</div>
+								<div className="title">{p.contactTitle}</div>
+								<div className="companyName">{p.companyName}</div>
+								<img src={`images/customers/customer_test.jpg`} alt="" className="photo" onClick={() => showSingleItem(p)} />
 							</div>
 						)
 					})}
