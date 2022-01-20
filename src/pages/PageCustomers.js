@@ -14,7 +14,7 @@ const PageCustomers = () => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
-	const [filteredItem, setFilteredItem] = useState({});
+	const [filteredItem, setFilteredItem] = useState(null);
 	const inputSearchText = useRef(null);
 
 	const isSmartphone = useMediaQuery({
@@ -68,7 +68,7 @@ const PageCustomers = () => {
 
 			const urlId = qsys.getParameterValueFromUrl('id');
 			if (urlId !== '') {
-				_filteredItems = _initialItems.filter(m => m.customerID === urlId);
+				_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
 				updateUrlWithId(_filteredItems[0]);
 			}
 
@@ -81,12 +81,18 @@ const PageCustomers = () => {
 
 			setInitialItems(_initialItems);
 			setFilteredItems(_filteredItems);
+			const _filteredItem = _filteredItems[0];
 			if (_filteredItems.length === 1) {
-				setFilteredItem(_filteredItems[0]);
+				setFilteredItem(_filteredItem);
 			}
+			console.log(setInitialItems.length);
+			console.log(setFilteredItems.length);
+			console.log(_filteredItem);
 
-			if (!isSmartphone) {
-				inputSearchText.current.focus();
+			if (!isSmartphone && urlId === '') {
+				setTimeout(() => {
+					inputSearchText.current.focus();
+				}, 200);
 			}
 		}, 1000);
 
@@ -178,7 +184,7 @@ const PageCustomers = () => {
 			)}
 
 			{/* SINGLE EMPLOYEE */}
-			{filteredItems.length === 1 && (
+			{filteredItem !== null && (
 				<div className="singleItemCard">
 					<div className="innerArea">
 						<img src={`images/customers/customer_test.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
