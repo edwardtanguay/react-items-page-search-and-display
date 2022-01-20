@@ -104,7 +104,7 @@ div.pageEmployees {
 					font-style: italic;
 					color: brown;
 				}
-				img {
+				img.photo {
 					width: 90%;
 				}
 			}
@@ -117,15 +117,6 @@ div.pageEmployees {
 		div.singleEmployeeCard {
 			box-shadow: none;
 			min-height: none;
-			div.fullName {
-				font-size: 1.7rem;
-			}
-			div.title {
-				font-size: 1.2rem;
-			}
-			div.notes {
-				font-size: 1.1rem;
-			}
 			div.innerArea {
 				display: block;
 				img {
@@ -133,9 +124,20 @@ div.pageEmployees {
 					float: right;
 					margin: 0 10px 0 20px;
 				}
-				.clear {
-					clear: both;
+				div.info {
+					div.fullName {
+						font-size: 1.7rem;
+					}
+					div.title {
+						font-size: 1.2rem;
+					}
+					div.notes {
+						font-size: 1.1rem;
+					}
 				}
+			}
+			.clear {
+				clear: both;
 			}
 		}
 	}

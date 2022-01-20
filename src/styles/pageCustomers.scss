@@ -79,41 +79,53 @@ div.pageCustomers {
 
 /* smartphone view */
 @media (max-width: 577px) {
-	div.itemCard {
-		width: 100%;
-		border-radius: 0;
-		padding: 15px;
-		box-shadow: none;
-		div.fullName {
-			font-size: 1.9rem;
+	div.pageCustomers {
+		div.itemsArea {
+			div.itemCard {
+				width: 100%;
+				border-radius: 0;
+				padding: 15px;
+				box-shadow: none;
+				div.fullName {
+					font-size: 1.9rem;
+				}
+				div.title {
+					font-size: 1.5rem;
+					font-style: italic;
+					color: brown;
+				}
+				img {
+					width: 90%;
+				}
+			}
 		}
-		div.title {
-			font-size: 1.5rem;
-			font-style: italic;
-			color: brown;
-		}
-		img {
-			width: 90%;
-		}
-	}
-	div.singleItemCard {
-		box-shadow: none;
-		min-height: none;
-		div.fullName {
-			font-size: 1.7rem;
-		}
-		div.title {
-			font-size: 1.2rem;
-		}
-		div.notes {
-			font-size: 1.1rem;
-		}
-		div.innerArea {
-			display: block;
-			img {
-				width: 130px;
-				float: right;
-				margin: 0 10px 0 20px;
+		div.singleItemCard {
+			box-shadow: none;
+			min-height: none;
+			div.innerArea {
+				display: block;
+				img.photo {
+					width: 110px;
+					float: right;
+					margin: 0 10px 0 20px;
+				}
+				div.info {
+					div.fullName {
+						font-size: 1.4rem;
+					}
+					div.title {
+						font-size: 1.2rem;
+					}
+					div.companyName {
+						font-size: 1.2rem;
+					}
+					div.address {
+						font-size: 1.2rem;
+					}
+					div.notes {
+						font-size: 1.1rem;
+					}
+				}
 			}
 			.clear {
 				clear: both;

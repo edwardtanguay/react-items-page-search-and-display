@@ -85,9 +85,6 @@ const PageCustomers = () => {
 			if (_filteredItems.length === 1) {
 				setFilteredItem(_filteredItem);
 			}
-			console.log(setInitialItems.length);
-			console.log(setFilteredItems.length);
-			console.log(_filteredItem);
 
 			if (!isSmartphone && urlId === '') {
 				setTimeout(() => {
@@ -167,27 +164,27 @@ const PageCustomers = () => {
 				<input type="text" ref={inputSearchText} placeholder="SEARCH" value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
 			</div>
 
-			{/* MULTIPLE EMPLOYEES */}
+			{/* MULTIPLE ITEMS */}
 			{filteredItems.length > 1 && (
 				<div className="itemsArea">
-					{filteredItems.map((p, i) => {
+					{filteredItems.map((filteredItem, i) => {
 						return (
 							<div className="itemCard" key={i}>
-								<div className="fullName">{p.contactName}</div>
-								<div className="title">{p.contactTitle}</div>
-								<div className="companyName">{p.companyName}</div>
-								<img src={`images/customers/customer_test.jpg`} alt="" className="photo" onClick={() => showSingleItem(p)} />
+								<div className="fullName">{filteredItem.contactName}</div>
+								<div className="title">{filteredItem.contactTitle}</div>
+								<div className="companyName">{filteredItem.companyName}</div>
+								<img src={`images/customers/customer_${filteredItem.customerID.toLowerCase()}.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 							</div>
 						)
 					})}
 				</div>
 			)}
 
-			{/* SINGLE EMPLOYEE */}
+			{/* SINGLE ITEM */}
 			{filteredItem !== null && (
 				<div className="singleItemCard">
 					<div className="innerArea">
-						<img src={`images/customers/customer_test.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
+						<img src={`images/customers/customer_${filteredItem.customerID.toLowerCase()}.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 						<div className="info">
 							<div className="fullName">{filteredItem.contactName}</div>
 							<div className="title">{filteredItem.contactTitle}</div>
