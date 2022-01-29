@@ -3,17 +3,17 @@ import * as qsys from '../qtools/qsys';
 
 export const itemPageManager = Component => {
 
-	const updateUrlBase = () => {
-		qsys.changeBrowserState(document, 'customers', '', '', `All Customers`);
+	const updateUrlBase = (pageConfig) => {
+		qsys.changeBrowserState(document, pageConfig.itemSingularTitle, '', '', `All ${pageConfig.itemPluralTitle}`);
 	}
 
-	const updateUrlWithId = (item) => {
-		qsys.changeBrowserState(document, 'customers', 'id', item.customerID, `Customer: ${item.contactName}`);
+	const updateUrlWithId = (item, pageConfig) => {
+		qsys.changeBrowserState(document, pageConfig.itemPluralText, 'id', item[pageConfig.itemIdFieldName], `${pageConfig.itemSingularTitle}: ${item.contactName}`);
 	};
 
-	const updateUrlWithSearchText = (searchText) => {
+	const updateUrlWithSearchText = (searchText, pageConfig) => {
 		if (searchText.trim() === '') {
-			updateUrlBase();
+			updateUrlBase(pageConfig);
 		} else {
 			qsys.changeBrowserState(document, 'customers', 'searchText', searchText, `Customer Search: "${searchText}"`);
 		}
@@ -28,14 +28,14 @@ export const itemPageManager = Component => {
 		const urlId = qsys.getParameterValueFromUrl('id');
 		if (urlId !== '') {
 			_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
-			updateUrlWithId(_filteredItems[0]);
+			updateUrlWithId(_filteredItems[0], pageConfig);
 		}
 
 		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
 		if (urlSearchText !== '') {
 			_filteredItems = searchAllItems(_initialItems, urlSearchText);
 			setSearchText(urlSearchText);
-			updateUrlWithSearchText(urlSearchText);
+			updateUrlWithSearchText(urlSearchText, pageConfig);
 		}
 
 		setInitialItems(_initialItems);
@@ -71,7 +71,7 @@ export const itemPageManager = Component => {
 		return foundItems;
 	}
 
-	const hocDisplaySearchResults = (e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem) => {
+	const hocDisplaySearchResults = (pageConfig, e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem) => {
 		const searchText = e.target.value;
 		if (searchText.trim() !== '' || filteredItems.length > 0) {
 			setSearchText(e.target.value);
@@ -83,24 +83,24 @@ export const itemPageManager = Component => {
 			} else {
 				setFilteredItem(null);
 			}
-			updateUrlWithSearchText(searchText);
+			updateUrlWithSearchText(searchText, pageConfig);
 		}
 	}
 
-	const hocShowSingleItem = (item, setFilteredItems, setFilteredItem) => {
+	const hocShowSingleItem = (pageConfig, item, setFilteredItems, setFilteredItem) => {
 		setFilteredItems([item]);
 		setFilteredItem(item);
-		updateUrlWithId(item);
+		updateUrlWithId(item, pageConfig);
 	}
 
-	const hocShowAllItems = (setInitialItems, initialItems, setFilteredItems, setFilteredItem, setSearchText, isSmartphone, inputSearchText) => {
+	const hocShowAllItems = (pageConfig, setInitialItems, initialItems, setFilteredItems, setFilteredItem, setSearchText, isSmartphone, inputSearchText) => {
 		setInitialItems(initialItems);
 		setFilteredItems(initialItems);
 		if (initialItems.length === 1) {
 			setFilteredItem(initialItems[0]);
 		}
 		setSearchText('');
-		updateUrlBase();
+		updateUrlBase(pageConfig);
 		setTimeout(() => {
 			if (!isSmartphone) {
 				inputSearchText.current.focus();
@@ -109,6 +109,6 @@ export const itemPageManager = Component => {
 	}
 
 	return (props) => {
-		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} hocShowSingleItem={hocShowSingleItem} hocShowAllItems={hocShowAllItems} />
+		return <Component {...props} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} hocShowSingleItem={hocShowSingleItem} hocShowAllItems={hocShowAllItems} />
 	}
 }

@@ -6,7 +6,11 @@ import '../styles/pageCustomers.scss';
 import { FaSpinner } from 'react-icons/fa';
 
 const pageConfig = {
-	itemNamePlural: 'Customers',
+	itemSingularTitle: 'Customer',
+	itemPluralTitle: 'Customers',
+	itemSingularText: 'customer',
+	itemPluralText: 'customers',
+	itemIdFieldName: 'customerID',
 	apiUrl: 'https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json',
 	decorateItems: m => {
 		m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
@@ -15,7 +19,7 @@ const pageConfig = {
 	}
 };
 
-const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader, hocDisplaySearchResults, hocShowAllItems, hocShowSingleItem }) => {
+const PageCustomers = ({ pageLoader, hocDisplaySearchResults, hocShowAllItems, hocShowSingleItem }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -31,16 +35,16 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 	}, []);
 
 	const displaySearchResults = (e) => {
-		hocDisplaySearchResults(e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem);
+		hocDisplaySearchResults(pageConfig, e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem);
 	}
 
 	const showSingleItem = (item) => {
-		hocShowSingleItem(item, setFilteredItems, setFilteredItem);
+		hocShowSingleItem(pageConfig, item, setFilteredItems, setFilteredItem);
 	}
 
 	
 	const showAllItems = () => {
-		hocShowAllItems(setInitialItems, initialItems, setFilteredItems, setFilteredItem, setSearchText, isSmartphone, inputSearchText);
+		hocShowAllItems(pageConfig, setInitialItems, initialItems, setFilteredItems, setFilteredItem, setSearchText, isSmartphone, inputSearchText);
 	}
 
 	return (
@@ -49,25 +53,25 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 			<div className="totalHeader">
 				{filteredItems.length > 1 && filteredItems.length < initialItems.length && (
 					<div>
-						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {pageConfig.itemNamePlural}</span>
+						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {pageConfig.itemPluralTitle}</span>
 					</div>
 				)}
 
 				{filteredItems.length === 1 && (
 					<div>
-						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {pageConfig.itemNamePlural}</span>
+						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {pageConfig.itemPluralTitle}</span>
 					</div>
 				)}
 
 				{filteredItems.length === initialItems.length && filteredItems.length !== 0 && (
 					<div>
-						<div>{initialItems.length} {pageConfig.itemNamePlural}</div>
+						<div>{initialItems.length} {pageConfig.itemPluralTitle}</div>
 					</div>
 				)}
 
 				{filteredItems.length === 0 && (
 					<div className="pageLoadingArea">
-						<div>Loading {pageConfig.itemNamePlural.toLowerCase()}... <FaSpinner className="spinner" /> </div>
+						<div>Loading {pageConfig.itemPluralTitle.toLowerCase()}... <FaSpinner className="spinner" /> </div>
 					</div>
 				)}
 			</div>
