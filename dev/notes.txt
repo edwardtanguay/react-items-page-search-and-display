@@ -1,9 +1,9 @@
 - x bug: bug:  Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
 
-- ,, make HOCs and put bring functionality into them 
+- x make HOCs and put bring functionality into them 
 	- x make dataManager and bring all in
 		- x all useEffect in
-	- .. convert all "customers"
+	- x convert all "customers"
 	- all pictures in, perhaps with limit
 - generize component
 - make suppliers site with suppliers and share dataManager and siteManager
