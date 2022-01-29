@@ -4,9 +4,11 @@
 	- x make dataManager and bring all in
 		- x all useEffect in
 	- x convert all "customers"
+- .. generize component
 	- all pictures in, perhaps with limit
-- generize component
-- make suppliers site with suppliers and share dataManager and siteManager
+
+- replace suppliers with products and include 20 with pictures
+	- https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/products.json
 
 
 // TODO: test bad urls e.g. customers?id=undefined

@@ -87,7 +87,7 @@ const PageCustomers = ({ pageLoader, hocDisplaySearchResults, hocShowAllItems, h
 						return (
 							<div className="itemCard" key={i}>
 								<div className="fullName">{filteredItem.contactName}</div>
-								<div className="title">{filteredItem.contactTitle}</div>
+								<div className="title">{filteredItem.contactTitle} ({filteredItem.customerID.toLowerCase()})</div>
 								<div className="companyName">{filteredItem.companyName}</div>
 								<img src={`images/customers/customer_${filteredItem.customerID.toLowerCase()}.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 							</div>

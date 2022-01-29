@@ -4,7 +4,7 @@ import * as qsys from '../qtools/qsys';
 export const itemPageManager = Component => {
 
 	const updateUrlBase = (pageConfig) => {
-		qsys.changeBrowserState(document, pageConfig.itemSingularTitle, '', '', `All ${pageConfig.itemPluralTitle}`);
+		qsys.changeBrowserState(document, pageConfig.itemPluralText, '', '', `All ${pageConfig.itemPluralTitle}`);
 	}
 
 	const updateUrlWithId = (item, pageConfig) => {
