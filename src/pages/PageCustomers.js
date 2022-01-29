@@ -15,7 +15,7 @@ const pageConfig = {
 	}
 };
 
-const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader, hocDisplaySearchResults }) => {
+const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader, hocDisplaySearchResults, showSingleItem }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -32,12 +32,6 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 
 	const displaySearchResults = (e) => {
 		hocDisplaySearchResults(e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem);
-	}
-
-	const showSingleItem = (item) => {
-		setFilteredItems([item]);
-		setFilteredItem(item);
-		updateUrlWithId(item);
 	}
 
 	const showAllItems = () => {

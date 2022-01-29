@@ -87,7 +87,13 @@ export const itemPageManager = Component => {
 		}
 	}
 
+	const showSingleItem = (item, setFilteredItems, setFilteredItem) => {
+		setFilteredItems([item]);
+		setFilteredItem(item);
+		updateUrlWithId(item);
+	}
+
 	return (props) => {
-		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} />
+		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} showSingleItem={showSingleItem} />
 	}
 }
