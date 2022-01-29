@@ -53,9 +53,7 @@ const PageCustomers = () => {
 	}
 
 	useEffect(() => {
-
-		setTimeout(async () => {
-
+		(async () => {
 			const response = await fetch('https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json');
 			const rawItemsFromJson = await response.json();
 
@@ -88,10 +86,12 @@ const PageCustomers = () => {
 
 			if (!isSmartphone && urlId === '') {
 				setTimeout(() => {
-					inputSearchText.current.focus();
+					if (inputSearchText.current !== null) {
+						inputSearchText.current.focus();
+					}
 				}, 200);
 			}
-		}, 1000);
+		})();
 
 	}, []);
 
