@@ -87,13 +87,28 @@ export const itemPageManager = Component => {
 		}
 	}
 
-	const showSingleItem = (item, setFilteredItems, setFilteredItem) => {
+	const hocShowSingleItem = (item, setFilteredItems, setFilteredItem) => {
 		setFilteredItems([item]);
 		setFilteredItem(item);
 		updateUrlWithId(item);
 	}
 
+	const hocShowAllItems = (setInitialItems, initialItems, setFilteredItems, setFilteredItem, setSearchText, isSmartphone, inputSearchText) => {
+		setInitialItems(initialItems);
+		setFilteredItems(initialItems);
+		if (initialItems.length === 1) {
+			setFilteredItem(initialItems[0]);
+		}
+		setSearchText('');
+		updateUrlBase();
+		setTimeout(() => {
+			if (!isSmartphone) {
+				inputSearchText.current.focus();
+			}
+		}, 100);
+	}
+
 	return (props) => {
-		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} showSingleItem={showSingleItem} />
+		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} hocShowSingleItem={hocShowSingleItem} hocShowAllItems={hocShowAllItems} />
 	}
 }

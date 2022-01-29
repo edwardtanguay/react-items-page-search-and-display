@@ -15,7 +15,7 @@ const pageConfig = {
 	}
 };
 
-const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader, hocDisplaySearchResults, showSingleItem }) => {
+const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader, hocDisplaySearchResults, hocShowAllItems, hocShowSingleItem }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -34,19 +34,13 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 		hocDisplaySearchResults(e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem);
 	}
 
+	const showSingleItem = (item) => {
+		hocShowSingleItem(item, setFilteredItems, setFilteredItem);
+	}
+
+	
 	const showAllItems = () => {
-		setInitialItems(initialItems);
-		setFilteredItems(initialItems);
-		if (initialItems.length === 1) {
-			setFilteredItem(initialItems[0]);
-		}
-		setSearchText('');
-		updateUrlBase();
-		setTimeout(() => {
-			if (!isSmartphone) {
-				inputSearchText.current.focus();
-			}
-		}, 100);
+		hocShowAllItems(setInitialItems, initialItems, setFilteredItems, setFilteredItem, setSearchText, isSmartphone, inputSearchText);
 	}
 
 	return (
@@ -77,7 +71,6 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 					</div>
 				)}
 			</div>
-
 
 			<div className="searchArea">
 				<input type="text" ref={inputSearchText} placeholder="SEARCH" value={searchText} onFocus={displaySearchResults} onChange={displaySearchResults} />
