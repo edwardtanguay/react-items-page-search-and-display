@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from 'react';
-import * as qsys from '../qtools/qsys';
 import { useMediaQuery } from 'react-responsive';
 import '../styles/pageItems.scss';
 import '../styles/pageCustomers.scss';
 import { FaSpinner } from 'react-icons/fa';
-
-// TODO: test bad urls e.g. customers?id=undefined
 
 const pageConfig = {
 	itemNamePlural: 'Customers',
@@ -18,7 +15,7 @@ const pageConfig = {
 	}
 };
 
-const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems }) => {
+const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -30,40 +27,7 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 	});
 
 	useEffect(async () => {
-		const response = await fetch(pageConfig.apiUrl);
-		const rawItemsFromJson = await response.json();
-		const _initialItems = rawItemsFromJson.map(pageConfig.decorateItems);
-		let _filteredItems = [..._initialItems];
-
-		const urlId = qsys.getParameterValueFromUrl('id');
-		if (urlId !== '') {
-			_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
-			updateUrlWithId(_filteredItems[0]);
-		}
-
-		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
-		if (urlSearchText !== '') {
-			_filteredItems = searchAllItems(_initialItems, urlSearchText);
-			setSearchText(urlSearchText);
-			updateUrlWithSearchText(urlSearchText);
-		}
-
-		setInitialItems(_initialItems);
-		setFilteredItems(_filteredItems);
-		const _filteredItem = _filteredItems[0];
-		if (_filteredItems.length === 1) {
-			setFilteredItem(_filteredItem);
-		} else {
-			setFilteredItem(null);
-		}
-
-		if (!isSmartphone && urlId === '') {
-			setTimeout(() => {
-				if (inputSearchText.current !== null) {
-					inputSearchText.current.focus();
-				}
-			}, 200);
-		}
+		pageLoader(pageConfig,setSearchText, setInitialItems, setFilteredItems, setFilteredItem, isSmartphone, inputSearchText);
 	}, []);
 
 	const displaySearchResults = (e) => {

@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useMediaQuery } from 'react-responsive';
 import * as qsys from '../qtools/qsys';
 
 export const itemPageManager = Component => {
@@ -20,6 +19,43 @@ export const itemPageManager = Component => {
 		}
 	};
 
+	const pageLoader = async (pageConfig, setSearchText, setInitialItems, setFilteredItems, setFilteredItem, isSmartphone, inputSearchText) => {
+		const response = await fetch(pageConfig.apiUrl);
+		const rawItemsFromJson = await response.json();
+		const _initialItems = rawItemsFromJson.map(pageConfig.decorateItems);
+		let _filteredItems = [..._initialItems];
+
+		const urlId = qsys.getParameterValueFromUrl('id');
+		if (urlId !== '') {
+			_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
+			updateUrlWithId(_filteredItems[0]);
+		}
+
+		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
+		if (urlSearchText !== '') {
+			_filteredItems = searchAllItems(_initialItems, urlSearchText);
+			setSearchText(urlSearchText);
+			updateUrlWithSearchText(urlSearchText);
+		}
+
+		setInitialItems(_initialItems);
+		setFilteredItems(_filteredItems);
+		const _filteredItem = _filteredItems[0];
+		if (_filteredItems.length === 1) {
+			setFilteredItem(_filteredItem);
+		} else {
+			setFilteredItem(null);
+		}
+
+		if (!isSmartphone && urlId === '') {
+			setTimeout(() => {
+				if (inputSearchText.current !== null) {
+					inputSearchText.current.focus();
+				}
+			}, 200);
+		}
+	}
+
 	const searchAllItems = (_items, searchText) => {
 		const foundItems = [];
 		_items.forEach(item => {
@@ -36,6 +72,6 @@ export const itemPageManager = Component => {
 	}
 
 	return (props) => {
-		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} />
+		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} />
 	}
 }
