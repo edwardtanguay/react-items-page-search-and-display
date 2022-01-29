@@ -9,7 +9,13 @@ import { FaSpinner } from 'react-icons/fa';
 // TODO: test bad urls e.g. customers?id=undefined
 
 const pageConfig = {
-	itemNamePlural: 'Customers'
+	itemNamePlural: 'Customers',
+	apiUrl: 'https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json',
+	decorateItems: m => {
+		m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
+		m.notes = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem! Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores? Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?';
+		return m;
+	}
 };
 
 const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems }) => {
@@ -23,49 +29,41 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 		query: '(max-width: 577px)'
 	});
 
-	useEffect(() => {
-		(async () => {
-			const response = await fetch('https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/customers.json');
-			const rawItemsFromJson = await response.json();
+	useEffect(async () => {
+		const response = await fetch(pageConfig.apiUrl);
+		const rawItemsFromJson = await response.json();
+		const _initialItems = rawItemsFromJson.map(pageConfig.decorateItems);
+		let _filteredItems = [..._initialItems];
 
-			const _initialItems = rawItemsFromJson.map(m => {
-				m.bulkSearchText = `${m.companyName}|${m.contactName}|${m.contactTitle}|${m.notes}`;
-				m.notes = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem! Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores? Earum at ducimus et vel repellat error maiores sint debitis illum? Deserunt voluptas nostrum, ratione maiores ducimus voluptatibus repellendus, delectus cumque voluptates rem dolorum ea molestiae necessitatibus sed, nesciunt porro?';
-				return m;
-			});
-			let _filteredItems = [..._initialItems];
+		const urlId = qsys.getParameterValueFromUrl('id');
+		if (urlId !== '') {
+			_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
+			updateUrlWithId(_filteredItems[0]);
+		}
 
-			const urlId = qsys.getParameterValueFromUrl('id');
-			if (urlId !== '') {
-				_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
-				updateUrlWithId(_filteredItems[0]);
-			}
+		const urlSearchText = qsys.getParameterValueFromUrl('searchText');
+		if (urlSearchText !== '') {
+			_filteredItems = searchAllItems(_initialItems, urlSearchText);
+			setSearchText(urlSearchText);
+			updateUrlWithSearchText(urlSearchText);
+		}
 
-			const urlSearchText = qsys.getParameterValueFromUrl('searchText');
-			if (urlSearchText !== '') {
-				_filteredItems = searchAllItems(_initialItems, urlSearchText);
-				setSearchText(urlSearchText);
-				updateUrlWithSearchText(urlSearchText);
-			}
+		setInitialItems(_initialItems);
+		setFilteredItems(_filteredItems);
+		const _filteredItem = _filteredItems[0];
+		if (_filteredItems.length === 1) {
+			setFilteredItem(_filteredItem);
+		} else {
+			setFilteredItem(null);
+		}
 
-			setInitialItems(_initialItems);
-			setFilteredItems(_filteredItems);
-			const _filteredItem = _filteredItems[0];
-			if (_filteredItems.length === 1) {
-				setFilteredItem(_filteredItem);
-			} else {
-				setFilteredItem(null);
-			}
-
-			if (!isSmartphone && urlId === '') {
-				setTimeout(() => {
-					if (inputSearchText.current !== null) {
-						inputSearchText.current.focus();
-					}
-				}, 200);
-			}
-		})();
-
+		if (!isSmartphone && urlId === '') {
+			setTimeout(() => {
+				if (inputSearchText.current !== null) {
+					inputSearchText.current.focus();
+				}
+			}, 200);
+		}
 	}, []);
 
 	const displaySearchResults = (e) => {
