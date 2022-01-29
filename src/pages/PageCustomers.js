@@ -8,7 +8,9 @@ import { FaSpinner } from 'react-icons/fa';
 
 // TODO: test bad urls e.g. customers?id=undefined
 
-const itemNamePlural = 'Customers';
+const pageConfig = {
+	itemNamePlural: 'Customers'
+};
 
 const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems }) => {
 	const [searchText, setSearchText] = useState('');
@@ -109,25 +111,25 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 			<div className="totalHeader">
 				{filteredItems.length > 1 && filteredItems.length < initialItems.length && (
 					<div>
-						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {itemNamePlural}</span>
+						{filteredItems.length} of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {pageConfig.itemNamePlural}</span>
 					</div>
 				)}
 
 				{filteredItems.length === 1 && (
 					<div>
-						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {itemNamePlural}</span>
+						1 of <span className="allItemsLink" onClick={showAllItems}>{initialItems.length} {pageConfig.itemNamePlural}</span>
 					</div>
 				)}
 
 				{filteredItems.length === initialItems.length && filteredItems.length !== 0 && (
 					<div>
-						<div>{initialItems.length} {itemNamePlural}</div>
+						<div>{initialItems.length} {pageConfig.itemNamePlural}</div>
 					</div>
 				)}
 
 				{filteredItems.length === 0 && (
 					<div className="pageLoadingArea">
-						<div>Loading {itemNamePlural.toLowerCase()}... <FaSpinner className="spinner" /> </div>
+						<div>Loading {pageConfig.itemNamePlural.toLowerCase()}... <FaSpinner className="spinner" /> </div>
 					</div>
 				)}
 			</div>
