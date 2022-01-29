@@ -10,7 +10,7 @@ import { FaSpinner } from 'react-icons/fa';
 
 const itemNamePlural = 'Customers';
 
-const PageCustomers = () => {
+const PageCustomers = ({ updateUrlBase }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -20,10 +20,6 @@ const PageCustomers = () => {
 	const isSmartphone = useMediaQuery({
 		query: '(max-width: 577px)'
 	});
-
-	const updateUrlBase = () => {
-		qsys.changeBrowserState(document, 'customers', '', '', `All Customers`);
-	}
 
 	const updateUrlWithId = (item) => {
 		qsys.changeBrowserState(document, 'customers', 'id', item.customerID, `Customer: ${item.contactName}`);
@@ -82,6 +78,8 @@ const PageCustomers = () => {
 			const _filteredItem = _filteredItems[0];
 			if (_filteredItems.length === 1) {
 				setFilteredItem(_filteredItem);
+			} else {
+				setFilteredItem(null);
 			}
 
 			if (!isSmartphone && urlId === '') {
@@ -104,6 +102,8 @@ const PageCustomers = () => {
 			setFilteredItems([...filteredItems]);
 			if (filteredItems.length === 1) {
 				setFilteredItem(filteredItems[0]);
+			} else {
+				setFilteredItem(null);
 			}
 			updateUrlWithSearchText(searchText);
 		}

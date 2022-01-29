@@ -1,1 +1,8 @@
-- .. bug: bug:  Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+- x bug: bug:  Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+
+- ,, make HOCs and put bring functionality into them 
+	- .. make dataManager and bring all in
+	- make siteManager and bring all in
+	- all pictures in, perhaps with limit
+
+- make suppliers site with suppliers and share dataManager and siteManager

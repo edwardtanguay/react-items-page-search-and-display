@@ -2,9 +2,13 @@ import './styles/App.scss';
 import { Routes, Route } from 'react-router-dom';
 import PageWelcome from './pages/PageHome';
 import PageEmployees from './pages/PageEmployees';
-import PageCustomers from './pages/PageCustomers';
+import _PageCustomers from './pages/PageCustomers';
 import PageSuppliers from './pages/PageSuppliers';
 import Menu from './components/Nav';
+import {itemPageManager} from './managers/itemPageManager';
+
+const PageCustomers = itemPageManager(_PageCustomers);
+
 
 function App() {
 	return (
