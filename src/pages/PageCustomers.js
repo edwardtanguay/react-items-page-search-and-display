@@ -10,7 +10,7 @@ import { FaSpinner } from 'react-icons/fa';
 
 const itemNamePlural = 'Customers';
 
-const PageCustomers = ({ updateUrlBase }) => {
+const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -20,33 +20,6 @@ const PageCustomers = ({ updateUrlBase }) => {
 	const isSmartphone = useMediaQuery({
 		query: '(max-width: 577px)'
 	});
-
-	const updateUrlWithId = (item) => {
-		qsys.changeBrowserState(document, 'customers', 'id', item.customerID, `Customer: ${item.contactName}`);
-	};
-
-	const updateUrlWithSearchText = (searchText) => {
-		if (searchText.trim() === '') {
-			updateUrlBase();
-		} else {
-			qsys.changeBrowserState(document, 'customers', 'searchText', searchText, `Customer Search: "${searchText}"`);
-		}
-	};
-
-	const searchAllItems = (_items, searchText) => {
-		const foundItems = [];
-		_items.forEach(item => {
-			let itemMatched = true;
-			const searchWords = searchText.split(' ');
-			searchWords.forEach(searchWord => {
-				if (!item.bulkSearchText.toUpperCase().includes(searchWord.toUpperCase())) {
-					itemMatched = false;
-				}
-			});
-			if (itemMatched) foundItems.push(item);
-		});
-		return foundItems;
-	}
 
 	useEffect(() => {
 		(async () => {
