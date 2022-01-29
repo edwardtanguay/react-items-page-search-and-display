@@ -71,7 +71,23 @@ export const itemPageManager = Component => {
 		return foundItems;
 	}
 
+	const hocDisplaySearchResults = (e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem) => {
+		const searchText = e.target.value;
+		if (searchText.trim() !== '' || filteredItems.length > 0) {
+			setSearchText(e.target.value);
+
+			const filteredItems = searchAllItems([...initialItems], searchText);
+			setFilteredItems([...filteredItems]);
+			if (filteredItems.length === 1) {
+				setFilteredItem(filteredItems[0]);
+			} else {
+				setFilteredItem(null);
+			}
+			updateUrlWithSearchText(searchText);
+		}
+	}
+
 	return (props) => {
-		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} />
+		return <Component {...props} updateUrlBase={updateUrlBase} updateUrlWithId={updateUrlWithId} updateUrlWithSearchText={updateUrlWithSearchText} searchAllItems={searchAllItems} pageLoader={pageLoader} hocDisplaySearchResults={hocDisplaySearchResults} />
 	}
 }

@@ -15,7 +15,7 @@ const pageConfig = {
 	}
 };
 
-const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader }) => {
+const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText, searchAllItems, pageLoader, hocDisplaySearchResults }) => {
 	const [searchText, setSearchText] = useState('');
 	const [initialItems, setInitialItems] = useState([]);
 	const [filteredItems, setFilteredItems] = useState([]);
@@ -31,19 +31,7 @@ const PageCustomers = ({ updateUrlBase, updateUrlWithId, updateUrlWithSearchText
 	}, []);
 
 	const displaySearchResults = (e) => {
-		const searchText = e.target.value;
-		if (searchText.trim() !== '' || filteredItems.length > 0) {
-			setSearchText(e.target.value);
-
-			const filteredItems = searchAllItems([...initialItems], searchText);
-			setFilteredItems([...filteredItems]);
-			if (filteredItems.length === 1) {
-				setFilteredItem(filteredItems[0]);
-			} else {
-				setFilteredItem(null);
-			}
-			updateUrlWithSearchText(searchText);
-		}
+		hocDisplaySearchResults(e, filteredItems, setSearchText, initialItems, setFilteredItems, setFilteredItem);
 	}
 
 	const showSingleItem = (item) => {
