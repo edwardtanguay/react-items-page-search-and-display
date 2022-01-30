@@ -4,10 +4,10 @@
 	- x make dataManager and bring all in
 		- x all useEffect in
 	- x convert all "customers"
-- .. generize component
-	- all pictures in, perhaps with limit
+- x generize component
+	- x all pictures in, perhaps with limit
 
-- replace suppliers with products and include 20 with pictures
+- .. replace suppliers with products and include 20 with pictures
 	- https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/products.json
 
 
