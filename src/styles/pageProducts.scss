@@ -1,9 +1,33 @@
+$item_card_background: #ddd; 
+
 div.pageProducts {
 	.itemList {
 		list-style-type: disc !important;
 		margin: 0 0 0 40px;
 		li {
 			cursor: pointer;
+		}
+	}
+
+	div.singleItemCard {
+		padding: 20px;
+		border: 1px solid #bbb;
+		border-radius: 5px;
+		margin: 0 0 20px 0;
+		max-width: 700px;
+		min-height: 212px;
+		box-shadow: 7px 5px 15px -8px #000000;
+		background: $item_card_background;
+		div.name {
+			font-size: 2.5rem;
+		}
+		div.quantityInfo {
+			color: rgb(109, 16, 16);
+			font-size: 1.9rem;
+			font-style: italic;
+		}
+		div.notes {
+			margin: 10px 0 0 0;
 		}
 	}
 }

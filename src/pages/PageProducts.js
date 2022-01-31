@@ -14,7 +14,7 @@ const pageConfig = {
 	apiUrl: 'https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/products.json',
 	decorateItems: m => {
 		m.bulkSearchText = `${m.quantityPerUnit}|${m.name}`;
-		m.notes = 'PRODUCT INFORMATION';
+		m.notes = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nisi delectus, quisquam enim pariatur mollitia cum et ipsam illo! Animi nulla alias officiis deleniti minima numquam? Porro beatae placeat exercitationem! Earum architecto quaerat, eum, placeat deserunt quod voluptate officia culpa autem reiciendis quidem animi? Eius, at neque aliquid dolores atque corrupti dolorem ex commodi mollitia sunt repudiandae? Impedit, magni! Asperiores?';
 		return m;
 	}
 };
@@ -71,7 +71,6 @@ const PageProducts = ({ pageLoader, hocDisplaySearchResults, hocShowAllItems, ho
 			{filteredItem !== null && (
 				<div className="singleItemCard">
 					<div className="innerArea">
-						<img src={`images/products/product_${filteredItem.productID}.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 						<div className="info">
 							<div className="name">{filteredItem.name}</div>
 							<div className="quantityInfo">{filteredItem.quantityPerUnit}</div>
