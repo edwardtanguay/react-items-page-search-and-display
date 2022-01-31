@@ -7,8 +7,10 @@
 - x generize component
 	- x all pictures in, perhaps with limit
 
-- .. replace suppliers with products and include 20 with pictures
+- ,, replace suppliers with products and include 20 with pictures
 	- https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/products.json
+	- x make shell page for products
+	- .. show text products
 
 
 // TODO: test bad urls e.g. customers?id=undefined

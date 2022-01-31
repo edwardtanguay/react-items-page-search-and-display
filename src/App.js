@@ -3,11 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 import PageWelcome from './pages/PageHome';
 import PageEmployees from './pages/PageEmployees';
 import _PageCustomers from './pages/PageCustomers';
-import PageSuppliers from './pages/PageSuppliers';
+import _PageProducts from './pages/PageProducts';
 import Menu from './components/Nav';
 import {itemPageManager} from './managers/itemPageManager';
 
 const PageCustomers = itemPageManager(_PageCustomers);
+const PageProducts = itemPageManager(_PageProducts);
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
 				<Route path="/" element={<PageWelcome />} />
 				<Route path="employees" element={<PageEmployees />} />
 				<Route path="customers" element={<PageCustomers />} />
-				<Route path="suppliers" element={<PageSuppliers />} />
+				<Route path="products" element={<PageProducts />} />
 			</Routes>
 		</div>
 	);
