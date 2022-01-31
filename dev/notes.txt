@@ -10,7 +10,11 @@
 - ,, replace suppliers with products and include 20 with pictures
 	- x https://raw.githubusercontent.com/graphql-compose/graphql-compose-examples/master/examples/northwind/data/json/products.json
 	- x make shell page for products
-	- .. show text products
+	- x show text products
+	- x fix layout and single item click
+	- .. fix layout of individual item
+	- update home page
+	- post as howto
 
 
 // TODO: test bad urls e.g. customers?id=undefined

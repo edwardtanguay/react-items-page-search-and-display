@@ -1,2 +1,9 @@
 div.pageProducts {
+	.itemList {
+		list-style-type: disc !important;
+		margin: 0 0 0 40px;
+		li {
+			cursor: pointer;
+		}
+	}
 }

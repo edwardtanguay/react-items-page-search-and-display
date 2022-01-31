@@ -15,7 +15,7 @@ export const itemPageManager = Component => {
 		if (searchText.trim() === '') {
 			updateUrlBase(pageConfig);
 		} else {
-			qsys.changeBrowserState(document, 'customers', 'searchText', searchText, `Customer Search: "${searchText}"`);
+			qsys.changeBrowserState(document, pageConfig.itemPluralText, 'searchText', searchText, `${pageConfig.itemSingularTitle} Search: "${searchText}"`);
 		}
 	};
 
@@ -26,8 +26,11 @@ export const itemPageManager = Component => {
 		let _filteredItems = [..._initialItems];
 
 		const urlId = qsys.getParameterValueFromUrl('id');
-		if (urlId !== '') {
-			_filteredItems = _initialItems.filter(m => m.customerID === urlId.toUpperCase());
+		const strUrlId = String(urlId);
+		console.log(strUrlId);
+		if (String(strUrlId) !== '') {
+			_filteredItems = _initialItems.filter(m => String(m[pageConfig.itemIdFieldName]) === strUrlId.toUpperCase());
+			console.log(_filteredItems);
 			updateUrlWithId(_filteredItems[0], pageConfig);
 		}
 
@@ -47,7 +50,7 @@ export const itemPageManager = Component => {
 			setFilteredItem(null);
 		}
 
-		if (!isSmartphone && urlId === '') {
+		if (!isSmartphone && strUrlId === '') {
 			setTimeout(() => {
 				if (inputSearchText.current !== null) {
 					inputSearchText.current.focus();

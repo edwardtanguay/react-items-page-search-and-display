@@ -55,13 +55,15 @@ const PageProducts = ({ pageLoader, hocDisplaySearchResults, hocShowAllItems, ho
 			{/* MULTIPLE ITEMS */}
 			{filteredItems.length > 1 && (
 				<div className="itemsArea">
-					{filteredItems.map((filteredItem, i) => {
-						return (
-							<div className="itemCard" key={i}>
-								<div className="name" onClick={() => showSingleItem(filteredItem)}>{filteredItem.name}</div>
-							</div>
-						)
-					})}
+					<ul className="itemList">
+						{filteredItems.map((filteredItem, i) => {
+							return (
+								<li className="item" key={i}>
+									<div className="name" onClick={() => showSingleItem(filteredItem)}>{filteredItem.name}</div>
+								</li>
+							)
+						})}
+					</ul>
 				</div>
 			)}
 
@@ -69,7 +71,7 @@ const PageProducts = ({ pageLoader, hocDisplaySearchResults, hocShowAllItems, ho
 			{filteredItem !== null && (
 				<div className="singleItemCard">
 					<div className="innerArea">
-						<img src={`images/products/product_${filteredItem.productID.toLowerCase()}.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
+						<img src={`images/products/product_${filteredItem.productID}.jpg`} alt="" className="photo" onClick={() => showSingleItem(filteredItem)} />
 						<div className="info">
 							<div className="name">{filteredItem.name}</div>
 							<div className="quantityInfo">{filteredItem.quantityPerUnit}</div>
