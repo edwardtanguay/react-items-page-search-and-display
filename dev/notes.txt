@@ -13,8 +13,8 @@
 	- x show text products
 	- x fix layout and single item click
 	- x fix layout of individual item
-	- update home page
-	- post as howto
+	- x update home page
+	- x post as howto
 
 
 // TODO: test bad urls e.g. customers?id=undefined

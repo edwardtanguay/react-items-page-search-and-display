@@ -21,14 +21,14 @@ const PageHome = () => {
 			<ul>
 				<li>loads from API</li>
 				<li>variables are named generically with the word <code>item</code></li>
-				<li>many functions for this page are imported and shared with the products page</li>
+				<li>functionality for this page is imported from itemPageManager and shared with the products page</li>
 			</ul>
 
 			<h2>Page: Products</h2>
 			<ul>
 				<li>loads from API</li>
 				<li>variables are named generically with the word <code>item</code></li>
-				<li>many functions for this page are imported and shared with the customers page</li>
+				<li>functionality for this page is imported from itemPageManager and shared with the customers page</li>
 			</ul>
 
 		</div>
